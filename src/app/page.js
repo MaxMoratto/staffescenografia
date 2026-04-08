@@ -27,10 +27,40 @@ export default function Home() {
             Explora más de 5,000 elementos escenográficos auténticos. Muebles de época, 
             estatuas temáticas y utilería detallada para tu próxima gran producción o evento.
           </p>
-          <div className="hero-cta">
-            <Link href="/catalogo" className="btn btn-primary" style={{ textDecoration: 'none' }}>Explorar Catálogo</Link>
+          <div className="hero-cta" style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+            <Link href="/catalogo" className="btn btn-primary" style={{ textDecoration: 'none' }}>Ver Catálogo</Link>
+            <Link href="/catalogo?new" className="btn btn-secondary" style={{ textDecoration: 'none' }}>Ver Novedades</Link>
           </div>
         </div>
+      </section>
+
+      {/* RESTORED FEATURES SECTION */}
+      <section className="features-section" style={{ marginTop: '4rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', padding: '0 1rem' }}>
+        <div className="feature-card" style={{ padding: '2.5rem', backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', border: '1px solid #f1f5f9' }}>
+          <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span style={{ fontSize: '1.5rem' }}>🎭</span> Utilería Temática
+          </h3>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>Más de 5,000 piezas detalladas para dar vida a cualquier época, cultura o fantasía imaginable.</p>
+        </div>
+        <div className="feature-card" style={{ padding: '2.5rem', backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', border: '1px solid #f1f5f9' }}>
+          <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span style={{ fontSize: '1.5rem' }}>🪑</span> Mobiliario Eventos
+          </h3>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>Salas lounge, mesas imperiales, periqueras y sillería premium para producciones de gran aforo.</p>
+        </div>
+        <div className="feature-card" style={{ padding: '2.5rem', backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', border: '1px solid #f1f5f9' }}>
+          <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span style={{ fontSize: '1.5rem' }}>🌿</span> Follaje y Plantas
+          </h3>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>Árboles a gran escala, muros verdes y centros de mesa botánicos hiperrealistas para inmersión total.</p>
+        </div>
+      </section>
+
+      {/* RESTORED CATALOG TITLE */}
+      <section style={{ marginTop: '5rem', marginBottom: '1rem', textAlign: 'center', padding: '0 1rem' }}>
+        <span style={{ color: 'var(--primary)', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Catálogo Exclusivo</span>
+        <h2 style={{ fontSize: '2.5rem', marginTop: '0.5rem' }}>Colecciones Curadas</h2>
+        <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '1rem auto 0' }}>Explora nuestras líneas conceptuales pre-armadas diseñadas por expertos escenógrafos.</p>
       </section>
 
       <section className="categories-grid" style={{
