@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from 'react';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../lib/firebase/config';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { auth, db } from '../../lib/firebase/config';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -16,19 +17,42 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
 
-    // LLAVE MAESTRA ABSOLUTA: Saltar seguridad estricta de Firebase por un momento
+    // LLAVE MAESTRA ABSOLUTA: Saltar seguridad estricta
     if (email === 'maxmoratto@gmail.com' && pwd === '1852maximo*1') {
       localStorage.setItem('admin_override', 'true');
       window.location.href = '/admin';
-      return; // Cierra la ejecución
+      return; 
     }
     
     try {
+      // Intentar loguear como VENDEDOR / STAFF desde Firestore Database
+      const q = query(
+        collection(db, "vendors"), 
+        where("email", "==", email.toLowerCase()), 
+        where("password", "==", pwd)
+      );
+      const snapshot = await getDocs(q);
+      
+      if (!snapshot.empty) {
+        const staffDoc = snapshot.docs[0].data();
+        if (staffDoc.status === 'Inactivo') {
+          setError('Tu acceso ha sido apagado por el administrador.');
+          setLoading(false);
+          return;
+        }
+        
+        // Logueo exitoso del staff por Base de Datos
+        localStorage.setItem('admin_override', 'true');
+        window.location.href = '/admin';
+        return;
+      }
+
+      // Si no fue staff, intentar fallback por Firebase Auth antiguo (Opcional)
       await signInWithEmailAndPassword(auth, email, pwd);
       window.location.href = '/admin';
     } catch(err) {
       console.error(err);
-      setError(`Error Firebase: ${err.message}`);
+      setError('Credenciales incorrectas o usuario no encontrado.');
     } finally {
       setLoading(false);
     }
