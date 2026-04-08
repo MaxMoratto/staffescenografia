@@ -1,4 +1,5 @@
 import './globals.css';
+import './catalog.css';
 import Link from 'next/link';
 
 export default function Home() {
