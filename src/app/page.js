@@ -36,7 +36,7 @@ export default function Home() {
       <section className="categories-grid" style={{
         marginTop: '2rem', 
         display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
+        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', 
         gap: '1rem',
         padding: '0 1rem'
       }}>
