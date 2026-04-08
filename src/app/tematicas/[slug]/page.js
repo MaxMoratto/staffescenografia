@@ -63,8 +63,9 @@ export default function TematicaLanding() {
   if (matchedTheme === "CIRCO VINTAGE") heroImage = '/themes/tema_circo_1775629712579.png';
   if (["BAILE DE MÁSCARAS / VENECIANO", "MARDI GRAS", "VENECIANO", "CARNAVAL"].includes(matchedTheme)) heroImage = '/themes/tema_veneciano_1775629726730.png';
   if (matchedTheme === "BLANCO Y NEGRO (ELEGANTE)") heroImage = '/themes/tema_blancoynegro_1775629742168.png';
-  if (["SAFARI / SELVA", "ANIMALES", "ANIMALES DE JUNGLA", "JUNGLA / SELVA", "ANIMALES DE ZOOLÓGICO"].includes(matchedTheme)) heroImage = '/themes/tema_safari_1775631433405.png';
+  if (["SAFARI / SELVA", "ANIMALES", "ANIMALES DE JUNGLA", "JUNGLA / SELVA", "ANIMALES DE ZOOLÓGICO", "SAFARI", "SELVA / SALVAJE"].includes(matchedTheme)) heroImage = '/themes/tema_safari_1775631433405.png';
   if (["ANIMALES DE GRANJA", "GRANJA"].includes(matchedTheme)) heroImage = '/themes/tema_granja_1775631452123.png';
+  if (["LONDRES"].includes(matchedTheme)) heroImage = '/themes/tema_londres_1775636270738.png';
   if (["CARIBE", "PLAYA"].includes(matchedTheme)) heroImage = '/themes/tema_caribe_1775631469531.png';
   if (matchedTheme === "DÉCADAS 70S") heroImage = '/themes/tema_70s_1775631487091.png';
   if (["DÉCADAS 80S", "80S", "RETRO"].includes(matchedTheme)) heroImage = '/themes/tema_80s_1775631803118.png';
@@ -72,6 +73,20 @@ export default function TematicaLanding() {
   if (["HARRY POTTER", "MAGIA Y HECHICERÍA"].includes(matchedTheme)) heroImage = '/themes/tema_magia_1775631829703.png';
   if (["GRIEGO", "DIOSES", "OLIMPO"].includes(matchedTheme)) heroImage = '/themes/tema_griego_1775631843850.png';
   if (matchedTheme === "PIRATA") heroImage = '/themes/tema_pirata_1775631860005.png';
+  if (["CABALLOS", "CABALLOS DE CARRUSEL"].includes(matchedTheme)) heroImage = '/themes/tema_caballos_1775635746730.png';
+  if (["MEXICANO", "DESPECHO", "ARTE MEXICANO"].includes(matchedTheme)) heroImage = '/themes/tema_mexicano_1775635761419.png';
+  if (["PREHISTÓRICO", "JURASICC PARK"].includes(matchedTheme)) heroImage = '/themes/tema_dinos_1775635777241.png';
+  if (["DRAGONES", "GODZILLA", "KING KONG"].includes(matchedTheme)) heroImage = '/themes/tema_monstruos_1775635793769.png';
+  if (["ARABE", "LAS MIL Y UNA NOCHES"].includes(matchedTheme)) heroImage = '/themes/tema_arabe_1775635809361.png';
+  if (["ROMANO", "ANTIGUEDAD"].includes(matchedTheme)) heroImage = '/themes/tema_romano_1775635879594.png';
+  if (["VINTAGE", "GREAT GASTBY", "CIRCO VINTAGE"].includes(matchedTheme)) heroImage = '/themes/tema_gatsby_1775635894583.png';
+  if (["STAR WARS", "ESPACIAL"].includes(matchedTheme)) heroImage = '/themes/tema_starwars_1775635909844.png';
+  if (["OKTOBERFEST", "CERVEZA"].includes(matchedTheme)) heroImage = '/themes/tema_oktoberfest_1775635925342.png';
+  if (["NAVIDAD / CHRISTMAS", "NACIMIENTOS", "POSADAS"].includes(matchedTheme)) heroImage = '/themes/tema_navidad_1775635963825.png';
+  if (["HALLOWEEN", "CASA DE LOS ESPANTOS"].includes(matchedTheme)) heroImage = '/themes/tema_halloween_1775635979854.png';
+  if (["DÍA DE MUERTOS", "CATRINAS"].includes(matchedTheme)) heroImage = '/themes/tema_diademuertos_1775635992113.png';
+  if (["DÍA DEL AMOR Y LA AMISTAD"].includes(matchedTheme)) heroImage = '/themes/tema_sanvalentin_1775636005008.png';
+  if (["FIESTA DE FIN DE AÑO", "NEON PARTY", "CARICATURAS", "PASCUA"].includes(matchedTheme)) heroImage = '/themes/tema_neon_1775636019582.png';
 
   const hasPhoto = heroImage.includes('.png');
   const heroStyle = hasPhoto ? {

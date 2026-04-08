@@ -53,8 +53,9 @@ export default function Home() {
           if (theme === "CIRCO VINTAGE") bgImage = `${gradient}, url('/themes/tema_circo_1775629712579.png')`;
           if (["BAILE DE MÁSCARAS / VENECIANO", "MARDI GRAS", "VENECIANO", "CARNAVAL"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_veneciano_1775629726730.png')`;
           if (theme === "BLANCO Y NEGRO (ELEGANTE)") bgImage = `${gradient}, url('/themes/tema_blancoynegro_1775629742168.png')`;
-          if (["SAFARI / SELVA", "ANIMALES", "ANIMALES DE JUNGLA", "JUNGLA / SELVA", "ANIMALES DE ZOOLÓGICO"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_safari_1775631433405.png')`;
+          if (["SAFARI / SELVA", "ANIMALES", "ANIMALES DE JUNGLA", "JUNGLA / SELVA", "ANIMALES DE ZOOLÓGICO", "SAFARI", "SELVA / SALVAJE"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_safari_1775631433405.png')`;
           if (["ANIMALES DE GRANJA", "GRANJA"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_granja_1775631452123.png')`;
+          if (["LONDRES"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_londres_1775636270738.png')`;
           if (["CARIBE", "PLAYA"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_caribe_1775631469531.png')`;
           if (theme === "DÉCADAS 70S") bgImage = `${gradient}, url('/themes/tema_70s_1775631487091.png')`;
           if (["DÉCADAS 80S", "80S", "RETRO"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_80s_1775631803118.png')`;
@@ -62,6 +63,20 @@ export default function Home() {
           if (["HARRY POTTER", "MAGIA Y HECHICERÍA"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_magia_1775631829703.png')`;
           if (["GRIEGO", "DIOSES", "OLIMPO"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_griego_1775631843850.png')`;
           if (theme === "PIRATA") bgImage = `${gradient}, url('/themes/tema_pirata_1775631860005.png')`;
+          if (["CABALLOS", "CABALLOS DE CARRUSEL"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_caballos_1775635746730.png')`;
+          if (["MEXICANO", "DESPECHO", "ARTE MEXICANO"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_mexicano_1775635761419.png')`;
+          if (["PREHISTÓRICO", "JURASICC PARK"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_dinos_1775635777241.png')`;
+          if (["DRAGONES", "GODZILLA", "KING KONG"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_monstruos_1775635793769.png')`;
+          if (["ARABE", "LAS MIL Y UNA NOCHES"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_arabe_1775635809361.png')`;
+          if (["ROMANO", "ANTIGUEDAD"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_romano_1775635879594.png')`;
+          if (["VINTAGE", "GREAT GASTBY", "CIRCO VINTAGE"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_gatsby_1775635894583.png')`;
+          if (["STAR WARS", "ESPACIAL"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_starwars_1775635909844.png')`;
+          if (["OKTOBERFEST", "CERVEZA"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_oktoberfest_1775635925342.png')`;
+          if (["NAVIDAD / CHRISTMAS", "NACIMIENTOS", "POSADAS"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_navidad_1775635963825.png')`;
+          if (["HALLOWEEN", "CASA DE LOS ESPANTOS"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_halloween_1775635979854.png')`;
+          if (["DÍA DE MUERTOS", "CATRINAS"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_diademuertos_1775635992113.png')`;
+          if (["DÍA DEL AMOR Y LA AMISTAD"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_sanvalentin_1775636005008.png')`;
+          if (["FIESTA DE FIN DE AÑO", "NEON PARTY", "CARICATURAS", "PASCUA"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_neon_1775636019582.png')`;
 
           const slug = theme.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
 

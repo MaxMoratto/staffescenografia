@@ -24,7 +24,69 @@ export default function NuevoProductoPage() {
 
   const handleImageChange = (e) => {
     const { name, files } = e.target;
-    if (files && files[0]) setPreviews(prev => ({ ...prev, [name]: URL.createObjectURL(files[0]) }));
+    if (files && files[0]) handleFileSelected(files[0], name);
+  };
+
+  const handleFileSelected = (file, name) => {
+    setPreviews(prev => ({ ...prev, [name]: URL.createObjectURL(file) }));
+    // Asignar el File al input hidden/real usando DataTransfer
+    const input = document.getElementById(`input_${name}`);
+    if (input) {
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      input.files = dataTransfer.files;
+    }
+  };
+
+  const handleDrop = async (e, name) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // 1. Si soltaron un archivo local desde su PC
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleFileSelected(e.dataTransfer.files[0], name);
+      return;
+    }
+
+    // 2. Si arrastraron una imagen desde otra ventana del navegador
+    const htmlData = e.dataTransfer.getData('text/html');
+    const textData = e.dataTransfer.getData('text/plain');
+    
+    let url = null;
+    if (htmlData) {
+      const match = htmlData.match(/src=["']([^"']+)["']/);
+      if (match) url = match[1];
+    }
+    if (!url && textData && textData.startsWith('http')) {
+      url = textData;
+    }
+
+    if (url) {
+      setLoading(true);
+      try {
+        // Enviar al proxy para saltar bloqueos CORS del navegador
+        const res = await fetch('/api/upload-url', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+        
+        if (!res.ok) throw new Error("CORS o error de descarga");
+        
+        const blob = await res.blob();
+        const file = new File([blob], `dragged_${Date.now()}.jpg`, { type: blob.type });
+        handleFileSelected(file, name);
+      } catch (err) {
+        console.error("Error dragging url", err);
+        alert("No se pudo descargar la imagen secreta del otro navegador por bloqueos de seguridad. Intenta guardarla en tu PC y luego arrástrala.");
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const triggerClick = (name) => {
+    document.getElementById(`input_${name}`).click();
   };
 
   // Auto-generate REAL SKU counter when name changes (Debounced)
@@ -156,30 +218,56 @@ export default function NuevoProductoPage() {
         </p>
 
         <div className="form-row" style={{ flexWrap: 'wrap', marginBottom: '2rem' }}>
-          <div className="form-group" style={{ minWidth: '45%' }}>
-            <label>1. Elemento Solo (Obligatorio) *</label>
-            <input type="file" name="image1" accept="image/*" className="form-input" onChange={handleImageChange} required />
-            <span style={{ fontSize: '0.75rem', color: '#888', display: 'block', marginBottom: '8px' }}>Debe estar recortado o tener un fondo limpio.</span>
-            {previews.image1 && <img src={previews.image1} alt="Preview 1" style={{ width: '100%', height: '150px', objectFit: 'contain', backgroundColor: '#fff', border: '1px dashed var(--border)', borderRadius: '4px' }} />}
-          </div>
-          <div className="form-group" style={{ minWidth: '45%' }}>
-            <label>2. Con Referencia Humana (Opcional)</label>
-            <input type="file" name="image2" accept="image/*" className="form-input" onChange={handleImageChange} />
-            <span style={{ fontSize: '0.75rem', color: '#888', display: 'block', marginBottom: '8px' }}>Mostrar a una persona junto a la pieza.</span>
-            {previews.image2 && <img src={previews.image2} alt="Preview 2" style={{ width: '100%', height: '150px', objectFit: 'contain', backgroundColor: '#fff', border: '1px dashed var(--border)', borderRadius: '4px' }} />}
-          </div>
-          <div className="form-group" style={{ minWidth: '45%' }}>
-            <label>3. Ángulo Diferente 1 (Opcional)</label>
-            <input type="file" name="image3" accept="image/*" className="form-input" onChange={handleImageChange} />
-            <span style={{ fontSize: '0.75rem', color: '#888', display: 'block', marginBottom: '8px' }}>Para ver profundidad.</span>
-            {previews.image3 && <img src={previews.image3} alt="Preview 3" style={{ width: '100%', height: '150px', objectFit: 'contain', backgroundColor: '#fff', border: '1px dashed var(--border)', borderRadius: '4px' }} />}
-          </div>
-          <div className="form-group" style={{ minWidth: '45%' }}>
-            <label>4. Ángulo Diferente 2 (Opcional)</label>
-            <input type="file" name="image4" accept="image/*" className="form-input" onChange={handleImageChange} />
-            <span style={{ fontSize: '0.75rem', color: '#888', display: 'block', marginBottom: '8px' }}>Para ver construcción trasera.</span>
-            {previews.image4 && <img src={previews.image4} alt="Preview 4" style={{ width: '100%', height: '150px', objectFit: 'contain', backgroundColor: '#fff', border: '1px dashed var(--border)', borderRadius: '4px' }} />}
-          </div>
+          
+          {[
+            { id: 'image1', label: '1. Elemento Solo (Obligatorio) *', tip: 'Debe estar recortado o tener un fondo limpio.', required: true },
+            { id: 'image2', label: '2. Con Referencia Humana (Opcional)', tip: 'Mostrar a una persona junto a la pieza.', required: false },
+            { id: 'image3', label: '3. Ángulo Diferente 1 (Opcional)', tip: 'Para ver profundidad.', required: false },
+            { id: 'image4', label: '4. Ángulo Diferente 2 (Opcional)', tip: 'Para ver construcción trasera.', required: false },
+          ].map(box => (
+            <div key={box.id} className="form-group" style={{ minWidth: '45%' }}>
+              <label>{box.label}</label>
+              
+              <div 
+                onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                onDrop={(e) => handleDrop(e, box.id)}
+                onClick={() => triggerClick(box.id)}
+                style={{ 
+                  border: '2px dashed #94a3b8', 
+                  borderRadius: '12px', 
+                  padding: '1.5rem', 
+                  textAlign: 'center', 
+                  cursor: 'pointer',
+                  backgroundColor: '#f8fafc',
+                  transition: 'all 0.2s ease',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}
+              >
+                <input 
+                  id={`input_${box.id}`}
+                  type="file" 
+                  name={box.id} 
+                  accept="image/*" 
+                  onChange={handleImageChange} 
+                  required={box.required}
+                  style={{ display: 'none' }} // Ocultamos el input feo real
+                />
+                
+                {previews[box.id] ? (
+                  <img src={previews[box.id]} alt={`Preview ${box.id}`} style={{ width: '100%', height: '150px', objectFit: 'contain', backgroundColor: '#fff', borderRadius: '4px' }} />
+                ) : (
+                  <div style={{ color: '#64748b', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '150px' }}>
+                    <span style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📥</span>
+                    <strong>Arrastra tu foto aquí</strong>
+                    <span style={{ fontSize: '0.75rem', marginTop: '0.2rem' }}>o da clic para buscar. <br/>¡Puedes arrastrar desde Google!</span>
+                  </div>
+                )}
+              </div>
+              <span style={{ fontSize: '0.75rem', color: '#888', display: 'block', marginTop: '8px' }}>{box.tip}</span>
+            </div>
+          ))}
+          
         </div>
 
         <h3>Datos Principales</h3>
