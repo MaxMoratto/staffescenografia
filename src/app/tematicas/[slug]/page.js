@@ -201,7 +201,7 @@ export default function TematicaLanding() {
         <span style={{ backgroundColor: 'var(--accent)', color: 'white', padding: '0.4rem 1rem', borderRadius: '30px', fontWeight: 'bold', fontSize: '0.85rem', marginBottom: '1.5rem', letterSpacing: '1px' }}>
           GUÍA PARA ARMAR TU EVENTO
         </span>
-        <h1 style={{ fontSize: '4rem', margin: '0 0 1rem 0', fontFamily: 'serif', letterSpacing: '-1px', maxWidth: '800px', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
+        <h1 className="hero-theme-title">
           {matchedTheme}
         </h1>
         <p style={{ fontSize: '1.25rem', maxWidth: '700px', opacity: 0.9, lineHeight: 1.6, textShadow: '0 2px 5px rgba(0,0,0,0.5)' }}>
@@ -231,7 +231,7 @@ export default function TematicaLanding() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
           
           {/* ZONA 1: ENTRADA */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem', alignItems: 'start' }}>
+          <div className="zona-grid">
             <div style={{ position: 'sticky', top: '100px' }}>
               <span style={{ fontSize: '2rem', display: 'block', marginBottom: '1rem' }}>🚪</span>
               <h3 style={{ fontSize: '1.8rem', margin: '0 0 1rem 0' }}>Entrada</h3>
@@ -272,7 +272,7 @@ export default function TematicaLanding() {
           <hr style={{ borderColor: '#e2e8f0', margin: '0' }} />
 
           {/* ZONA 2: LOBBY */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem', alignItems: 'start' }}>
+          <div className="zona-grid">
             <div style={{ position: 'sticky', top: '100px' }}>
               <span style={{ fontSize: '2rem', display: 'block', marginBottom: '1rem' }}>🛋️</span>
               <h3 style={{ fontSize: '1.8rem', margin: '0 0 1rem 0' }}>Lobby</h3>
@@ -296,7 +296,7 @@ export default function TematicaLanding() {
           <hr style={{ borderColor: '#e2e8f0', margin: '0' }} />
 
           {/* ZONA 3: SALÓN */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem', alignItems: 'start' }}>
+          <div className="zona-grid">
             <div style={{ position: 'sticky', top: '100px' }}>
               <span style={{ fontSize: '2rem', display: 'block', marginBottom: '1rem' }}>🥂</span>
               <h3 style={{ fontSize: '1.8rem', margin: '0 0 1rem 0' }}>Salón</h3>
@@ -337,7 +337,7 @@ export default function TematicaLanding() {
           <hr style={{ borderColor: '#e2e8f0', margin: '0' }} />
 
           {/* ZONA 4: SET FOTOGRÁFICO / PHOTO OP */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem', alignItems: 'start' }}>
+          <div className="zona-grid">
             <div style={{ position: 'sticky', top: '100px' }}>
               <span style={{ fontSize: '2rem', display: 'block', marginBottom: '1rem' }}>📸</span>
               <h3 style={{ fontSize: '1.8rem', margin: '0 0 1rem 0' }}>Set Fotográfico</h3>
@@ -360,7 +360,7 @@ export default function TematicaLanding() {
           <hr style={{ borderColor: '#e2e8f0', margin: '0' }} />
 
           {/* ZONA 5: ESCENARIO */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem', alignItems: 'start' }}>
+          <div className="zona-grid">
             <div style={{ position: 'sticky', top: '100px' }}>
               <span style={{ fontSize: '2rem', display: 'block', marginBottom: '1rem' }}>🎤</span>
               <h3 style={{ fontSize: '1.8rem', margin: '0 0 1rem 0' }}>Escenario</h3>

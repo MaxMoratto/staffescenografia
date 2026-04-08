@@ -124,3 +124,55 @@ button {
   background: rgba(0, 0, 0, 0.08);
   border-color: rgba(0, 0, 0, 0.15);
 }
+
+/* Grillas responsivas celulares */
+.categories-grid {
+  margin-top: 2rem;
+  display: grid;
+  /* En celular, forzamos mínimo 2 columnas para no hacer scroll infinito */
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .categories-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .categories-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    padding: 0;
+  }
+}
+
+.zona-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .zona-grid {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.hero-theme-title {
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+  font-family: serif;
+  letter-spacing: -1px;
+  max-width: 800px;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+@media (min-width: 768px) {
+  .hero-theme-title {
+    font-size: 4rem;
+  }
+}
