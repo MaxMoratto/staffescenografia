@@ -385,29 +385,14 @@ export default function TematicaLanding() {
       </div>
 
       {/* FLOAT CTA WHATSAPP */}
-      <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 100 }}>
+      <div className="float-cta-whatsapp">
         <a 
           href="https://wa.me/525519925221"
           target="_blank"
-          style={{ 
-            backgroundColor: '#25D366', 
-            color: 'white', 
-            padding: '1rem 2.5rem', 
-            borderRadius: '50px', 
-            textDecoration: 'none', 
-            fontWeight: 'bold', 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '10px',
-            boxShadow: '0 10px 25px rgba(37,211,102,0.4)',
-            transition: 'transform 0.2s',
-            fontSize: '1.2rem'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          className="whatsapp-btn-mobile"
         >
           <span style={{ fontSize: '1.5rem' }}>💬</span>
-          Cotiza
+          <span className="wa-text-mobile">Cotiza tu Evento</span>
         </a>
       </div>
 

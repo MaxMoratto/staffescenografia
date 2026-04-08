@@ -98,23 +98,23 @@ export default function CatalogoPage() {
   return (
     <div className="catalog-page-fluid">
       <header className="catalog-page-header" style={{ borderBottom: 'none', paddingBottom: '0' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
           <div className="header-logo">
             <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
               <h1 className="page-title">Staff <span className="highlight">Escenografía</span></h1>
             </Link>
-            <p className="page-subtitle">Inventario disponible para planeadores y agencias</p>
+            <p className="page-subtitle">Inventario de elementos</p>
           </div>
-          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', width: '100%', maxWidth: '500px', flexWrap: 'wrap' }}>
             <input 
               type="text" 
               className="search-input" 
               placeholder="🔍 Buscar pieza, código o estilo..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              style={{ borderRadius: '30px', padding: '0.6rem 1.2rem' }}
+              style={{ borderRadius: '30px', padding: '0.6rem 1.2rem', flexGrow: 1, minWidth: '200px' }}
             />
-            <button className="btn btn-primary" onClick={() => setIsSidebarOpen(true)}>
+            <button className="btn btn-primary" onClick={() => setIsSidebarOpen(true)} style={{ whiteSpace: 'nowrap' }}>
               Cotización ({totalItems})
             </button>
           </div>

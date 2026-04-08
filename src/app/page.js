@@ -1,16 +1,7 @@
-"use client";
 import './globals.css';
-import { useState } from 'react';
 import Link from 'next/link';
 
 export default function Home() {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // Filtrar temáticas basado en la búsqueda
-  const filteredThemes = ALL_THEMES.filter(theme => 
-    theme.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
     <main className="catalog-main container">
       <header className="catalog-header">
@@ -36,35 +27,20 @@ export default function Home() {
             Explora más de 5,000 elementos escenográficos auténticos. Muebles de época, 
             estatuas temáticas y utilería detallada para tu próxima gran producción o evento.
           </p>
-          <div className="hero-search-wrapper" style={{ marginTop: '2rem', width: '100%', maxWidth: '600px', margin: '2rem auto 0' }}>
-            <div style={{ position: 'relative' }}>
-              <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '1.2rem', color: '#64748b' }}>🔍</span>
-              <input 
-                type="text" 
-                placeholder="Busca tu temática... (ej. Hollywood, Navidad, Casino)" 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ 
-                  width: '100%', 
-                  padding: '1rem 1rem 1rem 3rem', 
-                  borderRadius: '50px', 
-                  border: '2px solid rgba(195, 155, 91, 0.3)', 
-                  fontSize: '1.1rem',
-                  outline: 'none',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                  transition: 'border-color 0.3s'
-                }}
-                onFocus={(e) => e.target.style.borderColor = 'var(--primary)'}
-                onBlur={(e) => e.target.style.borderColor = 'rgba(195, 155, 91, 0.3)'}
-              />
-            </div>
-            {searchTerm && <div style={{ textAlign: 'center', marginTop: '0.5rem', color: '#64748b', fontSize: '0.85rem' }}>Buscando: "{searchTerm}"</div>}
+          <div className="hero-cta">
+            <Link href="/catalogo" className="btn btn-primary" style={{ textDecoration: 'none' }}>Explorar Catálogo</Link>
           </div>
         </div>
       </section>
 
-      <section className="categories-grid" id="tematicas-grid">
-        {filteredThemes.map((theme) => {
+      <section className="categories-grid" style={{
+        marginTop: '2rem', 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
+        gap: '1rem',
+        padding: '0 1rem'
+      }}>
+        {ALL_THEMES.map((theme) => {
           let bgImage = "linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%)";
           const gradient = `linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%)`;
           

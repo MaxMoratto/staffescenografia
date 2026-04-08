@@ -176,3 +176,39 @@ button {
     font-size: 4rem;
   }
 }
+
+.float-cta-whatsapp {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 100;
+}
+
+.whatsapp-btn-mobile {
+  background-color: #25D366;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+  transition: transform 0.2s;
+  font-size: 1rem;
+}
+
+.whatsapp-btn-mobile:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 639px) {
+  .wa-text-mobile {
+    display: none; /* Hide text on small screens, keep only the icon so it doesn't break ficha width */
+  }
+  .whatsapp-btn-mobile {
+    padding: 0.8rem;
+    border-radius: 50%;
+  }
+}
