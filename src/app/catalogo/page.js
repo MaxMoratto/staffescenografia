@@ -18,6 +18,7 @@ export default function CatalogoPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('Todas las Categorías');
   const [themeFilter, setThemeFilter] = useState('TODAS LAS TEMÁTICAS');
+  const [bodegaFilter, setBodegaFilter] = useState('Todas');
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
@@ -88,11 +89,19 @@ export default function CatalogoPage() {
 
     const matchesCategory = categoryFilter === 'Todas las Categorías' || p.category === categoryFilter;
     
+    // Bodega filter
+    let matchesBodega = true;
+    if (bodegaFilter !== 'Todas') {
+      matchesBodega = p.availability && p.availability[bodegaFilter] > 0;
+    }
+
     // Al filtrar por tema, revisar si la selección EXACTA existe dentro del arreglo del producto
     const pThemesArr = (p.theme || '').split(',').map(t => t.trim().toUpperCase());
     const matchesTheme = themeFilter === 'TODAS LAS TEMÁTICAS' || pThemesArr.includes(themeFilter.toUpperCase());
+    
+    const isActive = p.status === 'Activo' || p.status === 'activo';
 
-    return matchesSearch && matchesCategory && matchesTheme;
+    return matchesSearch && matchesCategory && matchesBodega && matchesTheme && isActive;
   });
 
   return (
@@ -121,16 +130,33 @@ export default function CatalogoPage() {
         </div>
 
         {/* TOP MENU FOR CATEGORIES */}
-        <nav className="top-category-nav">
-          {uniqueCategories.map(cat => (
-            <button 
-              key={cat} 
-              className={`category-tab ${categoryFilter === cat ? 'active' : ''}`}
-              onClick={() => setCategoryFilter(cat)}
-            >
-              {cat}
-            </button>
-          ))}
+        <nav className="top-category-nav" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '5px', flexGrow: 1 }}>
+            {uniqueCategories.map(cat => (
+              <button 
+                key={cat} 
+                className={`category-tab ${categoryFilter === cat ? 'active' : ''}`}
+                onClick={() => setCategoryFilter(cat)}
+                style={{ whiteSpace: 'nowrap' }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+          
+          <select 
+            value={bodegaFilter} 
+            onChange={(e) => setBodegaFilter(e.target.value)}
+            style={{ padding: '0.5rem 1rem', borderRadius: '30px', border: '1px solid var(--border)', outline: 'none', backgroundColor: '#fff', fontSize: '0.9rem', color: 'var(--text-secondary)', cursor: 'pointer', fontWeight: '500' }}
+          >
+            <option value="Todas">🌎 Todas las Bodegas</option>
+            <option value="cdmx">📍 Bodega CDMX</option>
+            <option value="gdl">📍 Bodega Guadalajara</option>
+            <option value="mty">📍 Bodega Monterrey</option>
+            <option value="puebla">📍 Bodega Puebla</option>
+            <option value="slp">📍 Bodega San Luis Potosí</option>
+            <option value="toluca">📍 Bodega Toluca</option>
+          </select>
         </nav>
       </header>
 

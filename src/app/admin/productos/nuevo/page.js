@@ -119,6 +119,45 @@ export default function NuevoProductoPage() {
     return () => clearTimeout(timer);
   }, [productName]);
 
+  const resizeImage = (file, maxWidth = 1200) => {
+    return new Promise((resolve) => {
+      // Si no es imagen (por si acaso), lo devolvemos tal cual
+      if (!file.type.startsWith('image/')) return resolve(file);
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+
+          // Solo redimensionar si es más grande que el límite
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          // Exportar a JPEG comprimido
+          canvas.toBlob((blob) => {
+            const resizedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+              type: 'image/jpeg',
+              lastModified: Date.now()
+            });
+            resolve(resizedFile);
+          }, 'image/jpeg', 0.82); // 82% quality (muy buena compresión sin perder calidad visual)
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -134,11 +173,15 @@ export default function NuevoProductoPage() {
       const imageNames = ['image1', 'image2', 'image3', 'image4'];
       
       for (let i = 0; i < imageNames.length; i++) {
-        const file = form.get(imageNames[i]);
-        if (file && file.size > 0) {
+        const originalFile = form.get(imageNames[i]);
+        if (originalFile && originalFile.size > 0) {
+          
+          // 🔥 MAGIA: Redimensionamiento Automático en el Navegador 🔥
+          const fileToUpload = await resizeImage(originalFile, 1200);
+
           // Crea una ruta limpia en Storage: products/SKU/nombre_foto.jpg
-          const imageRef = ref(storage, `products/${sku}/${imageNames[i]}_${file.name}`);
-          await uploadBytes(imageRef, file);
+          const imageRef = ref(storage, `products/${sku}/${imageNames[i]}_${fileToUpload.name}`);
+          await uploadBytes(imageRef, fileToUpload);
           const url = await getDownloadURL(imageRef);
           imageUrls.push(url);
         }
@@ -168,7 +211,7 @@ export default function NuevoProductoPage() {
         },
         images: imageUrls, // Arreglo con las 4 fotos
         imageUrl: imageUrls[0] || '', // La foto principal (Elemento Solo) para miniaturas
-        status: 'activo',
+        status: 'Pendiente',
         createdAt: new Date()
       };
 
