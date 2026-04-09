@@ -19,6 +19,15 @@ export default function EditarProductoPage() {
   const [productData, setProductData] = useState(null);
   const [themes, setThemes] = useState([]);
 
+  // IMAGE EDITING STATES
+  const [existingImages, setExistingImages] = useState([null, null, null, null]);
+  const [newFiles, setNewFiles] = useState({ 0: null, 1: null, 2: null, 3: null });
+  const [previews, setPreviews] = useState({ 0: null, 1: null, 2: null, 3: null });
+
+  useEffect(() => {
+    return () => Object.values(previews).forEach(url => { if (url) URL.revokeObjectURL(url); });
+  }, [previews]);
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -29,6 +38,14 @@ export default function EditarProductoPage() {
           setProductData({ id: docSnap.id, ...data });
           if(data.theme) {
             setThemes(data.theme.split(',').map(t => t.trim()));
+          }
+          // Set existing images
+          if (data.images && data.images.length > 0) {
+            const loaded = [null, null, null, null];
+            data.images.forEach((imgUrl, i) => { if(i < 4) loaded[i] = imgUrl; });
+            setExistingImages(loaded);
+          } else if (data.imageUrl) {
+            setExistingImages([data.imageUrl, null, null, null]); // Fallback antiguo
           }
         } else {
           alert('No se encontró el producto');
@@ -42,45 +59,123 @@ export default function EditarProductoPage() {
     fetchProduct();
   }, [id]);
 
+  const resizeImage = (file, maxWidth = 1200) => {
+    return new Promise((resolve) => {
+      if (!file.type.startsWith('image/')) return resolve(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob((blob) => {
+            const resizedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+              type: 'image/jpeg',
+              lastModified: Date.now()
+            });
+            resolve(resizedFile);
+          }, 'image/jpeg', 0.82);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleImageChange = (e, index) => {
+    const file = e.target.files[0];
+    if (file) {
+      setNewFiles(prev => ({ ...prev, [index]: file }));
+      setPreviews(prev => ({ ...prev, [index]: URL.createObjectURL(file) }));
+    }
+  };
+
+  const handleRemoveImage = (index) => {
+    // Si era una existente, la borramos del arreglo
+    const updatedExisting = [...existingImages];
+    updatedExisting[index] = null;
+    setExistingImages(updatedExisting);
+    
+    // Si era una nueva, la quitamos
+    setNewFiles(prev => ({ ...prev, [index]: null }));
+    if(previews[index]) {
+      URL.revokeObjectURL(previews[index]);
+      setPreviews(prev => ({ ...prev, [index]: null }));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
+    
     try {
       const form = new FormData(e.target);
-      
-      const updatedProduct = {
-        name: form.get('name'),
-        category: form.get('category'),
-        theme: form.get('theme') || '',
-        rentalPrice: Number(form.get('price')),
-        shortDescription: form.get('description') || '',
-        dimensions: {
-          height: form.get('height') ? Number(form.get('height')) : null,
-          width: form.get('width') ? Number(form.get('width')) : null,
-          depth: form.get('depth') ? Number(form.get('depth')) : null,
-        },
-        weight: form.get('weight') ? Number(form.get('weight')) : null,
-        availability: {
-          cdmx: form.get('cdmx') ? Number(form.get('cdmx')) : 0,
-          gdl: form.get('gdl') ? Number(form.get('gdl')) : 0,
-          mty: form.get('mty') ? Number(form.get('mty')) : 0,
-          puebla: form.get('puebla') ? Number(form.get('puebla')) : 0,
-          slp: form.get('slp') ? Number(form.get('slp')) : 0,
-          toluca: form.get('toluca') ? Number(form.get('toluca')) : 0,
-        }
-      };
+      const sku = productData.sku;
 
-      await updateDoc(doc(db, "products", id), updatedProduct);
-      setSaveSuccess(true);
-      setTimeout(() => {
-        setSaveSuccess(false);
-        window.location.href = '/admin/productos'; // Regresa al inventario principal
-      }, 2000);
+      // 1. Upload any NEW images
+      import('firebase/storage').then(async ({ ref, uploadBytes, getDownloadURL }) => {
+        import('../../../../../lib/firebase/config').then(async ({ storage }) => {
+          
+          const finalImages = [...existingImages];
+          
+          for (let i = 0; i < 4; i++) {
+            if (newFiles[i]) {
+              const fileToUpload = await resizeImage(newFiles[i], 1200);
+              const imageRef = ref(storage, `products/${sku}/edit_${i}_${fileToUpload.name}`);
+              await uploadBytes(imageRef, fileToUpload);
+              const url = await getDownloadURL(imageRef);
+              finalImages[i] = url; // Put the new cloud URL in the specific slot
+            }
+          }
+
+          // 2. Filter out nulls to make the pure final Array
+          const cleanImagesArray = finalImages.filter(url => url !== null);
+
+          const updatedProduct = {
+            name: form.get('name'),
+            category: form.get('category'),
+            theme: form.get('theme') || '',
+            rentalPrice: Number(form.get('price')),
+            shortDescription: form.get('description') || '',
+            images: cleanImagesArray,
+            imageUrl: cleanImagesArray[0] || '', // Principal image
+            dimensions: {
+              height: form.get('height') ? Number(form.get('height')) : null,
+              width: form.get('width') ? Number(form.get('width')) : null,
+              depth: form.get('depth') ? Number(form.get('depth')) : null,
+            },
+            weight: form.get('weight') ? Number(form.get('weight')) : null,
+            availability: {
+              cdmx: form.get('cdmx') ? Number(form.get('cdmx')) : 0,
+              gdl: form.get('gdl') ? Number(form.get('gdl')) : 0,
+              mty: form.get('mty') ? Number(form.get('mty')) : 0,
+              puebla: form.get('puebla') ? Number(form.get('puebla')) : 0,
+              slp: form.get('slp') ? Number(form.get('slp')) : 0,
+              toluca: form.get('toluca') ? Number(form.get('toluca')) : 0,
+            }
+          };
+
+          await updateDoc(doc(db, "products", id), updatedProduct);
+          setSaveSuccess(true);
+          setTimeout(() => {
+            setSaveSuccess(false);
+            window.location.href = '/admin/productos'; // Regresa al inventario principal
+          }, 2000);
+        });
+      });
       
     } catch(err) {
       console.error(err);
       alert('Hubo un error editando. Revisa la consola.');
-    } finally {
       setSaving(false);
     }
   };
@@ -103,6 +198,51 @@ export default function EditarProductoPage() {
       )}
 
       <form onSubmit={handleSubmit} className="admin-card">
+        
+        <h3 style={{ borderBottom: '1px solid var(--border)', paddingBottom: 'var(--spacing-sm)', marginBottom: 'var(--spacing-md)' }}>
+          📸 Editar Fotografías de Pieza
+        </h3>
+        
+        <div className="form-row" style={{ flexWrap: 'wrap', marginBottom: '2rem' }}>
+          {[0, 1, 2, 3].map(index => {
+            const hasImage = previews[index] || existingImages[index];
+            const currentImgSrc = previews[index] || existingImages[index];
+            
+            return (
+              <div key={index} className="form-group" style={{ minWidth: '22%' }}>
+                <label>Foto {index + 1} {index === 0 ? '(Principal)' : ''}</label>
+                
+                <div style={{ position: 'relative', border: '2px dashed #94a3b8', borderRadius: '12px', padding: hasImage ? '0' : '1.5rem', textAlign: 'center', backgroundColor: '#f8fafc', height: '150px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  
+                  {hasImage ? (
+                    <>
+                      <img src={currentImgSrc} alt={`Foto ${index+1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <button 
+                        type="button" 
+                        onClick={() => handleRemoveImage(index)}
+                        style={{ position: 'absolute', top: '5px', right: '5px', background: 'red', color: 'white', border: 'none', borderRadius: '50%', width: '25px', height: '25px', cursor: 'pointer', fontWeight: 'bold' }}
+                      >X</button>
+                    </>
+                  ) : (
+                    <>
+                      <div style={{ color: '#64748b' }} onClick={() => document.getElementById(`editImage_${index}`).click()}>
+                        <span style={{ fontSize: '1.5rem', cursor: 'pointer' }}>➕ Reemplazar</span>
+                      </div>
+                      <input 
+                        id={`editImage_${index}`}
+                        type="file" 
+                        accept="image/*" 
+                        onChange={(e) => handleImageChange(e, index)} 
+                        style={{ display: 'none' }} 
+                      />
+                    </>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
         <h3>Datos Principales</h3>
         
         <div className="form-row">
