@@ -158,6 +158,32 @@ export default function NuevoProductoPage() {
     });
   };
 
+  const generateDynamicDescription = (name, category, themeStr) => {
+    const adjectives = ['impactante', 'espectacular', 'premium', 'exclusiva', 'de alta gama', 'vanguardista', 'inmersiva', 'hiperrealista'];
+    const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    
+    let base = `La pieza ${name} es una obra ${randomAdjective} diseñada para elevar el valor de producción de tu evento. `;
+    
+    if (category === 'Escenografía Temática') {
+      base += `Creada con calidad museográfica, se convierte en el escenari0 y punto focal perfecto para lograr una atmósfera realista e instagrameable. `;
+    } else if (category === 'Props y Decoración') {
+      base += `Sus texturas, relieves y detalles minuciosos aseguran que luzca perfecta ante la vista de los invitados e incluso en primeros planos de cámara. `;
+    } else if (category === 'Mobiliario para Eventos') {
+      base += `Combina una presencia estética superior con funcionalidad de alto nivel, pensada para sorprender asistentes V.I.P. `;
+    } else {
+      base += `Construida bajo estrictos manuales artísticos de Staff Escenografía para garantizar asombro y calidad visual insuperable. `;
+    }
+
+    if (themeStr && themeStr.length > 0) {
+      const themesArr = themeStr.split(',');
+      base += `Absolutamente recomendada para producciones inspiradas en ${themesArr[0]} o similares, logrando una narrativa inmersiva impecable.`;
+    } else {
+      base += `Gracias a su estética versátil, logra mimetizarse y enriquecer una amplia variedad de conceptos creativos y estilos de decoración.`;
+    }
+
+    return base;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -166,6 +192,15 @@ export default function NuevoProductoPage() {
       // 1. Gather basic form data
       const form = new FormData(e.target);
       const sku = form.get('sku');
+      const inputName = form.get('name');
+      const inputCategory = form.get('category');
+      const inputTheme = form.get('theme') || '';
+      
+      let finalDescription = form.get('description') || '';
+      if (!finalDescription || finalDescription.trim() === '') {
+        // Generar el texto si lo dejaron en blanco esperando la magia
+        finalDescription = generateDynamicDescription(inputName, inputCategory, inputTheme);
+      }
 
       // 2. Definir estado y cargar las 4 imágenes a Firebase Storage
       setLoading(true);
@@ -189,12 +224,12 @@ export default function NuevoProductoPage() {
 
       // 3. Crear el armazón del producto final para la Base de Datos
       const newProduct = {
-        name: form.get('name'),
-        sku: form.get('sku'),
-        category: form.get('category'),
-        theme: form.get('theme') || '',
+        name: inputName,
+        sku: sku,
+        category: inputCategory,
+        theme: inputTheme,
         rentalPrice: Number(form.get('price')),
-        shortDescription: form.get('description') || '',
+        shortDescription: finalDescription,
         dimensions: {
           height: form.get('height') ? Number(form.get('height')) : null,
           width: form.get('width') ? Number(form.get('width')) : null,
