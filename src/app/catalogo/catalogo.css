@@ -66,13 +66,24 @@
   .product-grid { grid-template-columns: repeat(4, 1fr); }
 }
 @media (max-width: 1024px) {
-  .product-grid { grid-template-columns: repeat(3, 1fr); }
+  .product-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem;}
 }
-@media (max-width: 768px) {
-  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-}
-@media (max-width: 480px) {
-  .product-grid { grid-template-columns: 1fr; }
+@media (max-width: 650px) {
+  .product-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 0.6rem; 
+  }
+  
+  /* Ajustes Mini-Card Móvil */
+  .product-image-container { height: 160px; }
+  .product-info { padding: 0.6rem; }
+  .product-name { font-size: 0.9rem; margin-bottom: 4px; }
+  .product-theme { font-size: 0.6rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .product-desc { display: none; /* Ocultamos la descripción larga en celular para ahorrar espacio */ }
+  .product-price { font-size: 1.1rem; }
+  .product-price span { font-size: 0.7rem; }
+  .info-badge { font-size: 0.65rem; padding: 2px 5px; }
+  .product-sku { font-size: 0.65rem; padding: 2px 6px; top: 6px; left: 6px; }
 }
 
 /* Product Card Premium Design */
