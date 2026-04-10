@@ -156,7 +156,8 @@ export default function AdminProductosPage() {
                       </td>
                       <td style={{ padding: '1rem' }}>
                         <strong style={{ color: 'var(--primary)', display: 'block' }}>{product.sku}</strong>
-                        <span style={{ fontWeight: '500', fontSize: '0.9rem' }}>{product.name}</span>
+                        <span style={{ fontWeight: '500', fontSize: '0.9rem', display: 'block', marginBottom: '2px' }}>{product.name}</span>
+                        <span style={{ fontSize: '0.85rem', color: '#16a34a', fontWeight: 'bold' }}>${product.rentalPrice} MXN / día</span>
                       </td>
                       <td style={{ padding: '1rem' }}>
                         <span className="info-badge" style={{ display: 'inline-block', marginBottom: '4px' }}>{totalStock} piezas totales</span>
