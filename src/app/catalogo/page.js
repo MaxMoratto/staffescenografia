@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../../lib/firebase/config';
 import ProductCard from '../../components/ProductCard';
 import ProductModal from '../../components/ProductModal';
@@ -31,19 +31,18 @@ export default function CatalogoPage() {
       }
     }
 
-    async function loadInventory() {
-      try {
-        const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
-        const snapshot = await getDocs(q);
-        const inv = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setProducts(inv);
-      } catch (e) {
-        console.error("Error trayendo inventario de Firebase:", e);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadInventory();
+    const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const inv = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setProducts(inv);
+      setLoading(false);
+    }, (error) => {
+      console.error("Error trayendo inventario de Firebase en tiempo real:", error);
+      // Fallback in case of error so it doesn't hang forever
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const uniqueCategories = [

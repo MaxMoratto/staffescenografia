@@ -98,3 +98,17 @@
   flex-grow: 1;
   min-width: 0;
 }
+
+@media (max-width: 900px) {
+  .catalog-layout-wrapper {
+    flex-direction: column;
+  }
+  
+  .catalog-theme-sidebar {
+    width: 100%;
+    position: static;
+    max-height: 220px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+}
