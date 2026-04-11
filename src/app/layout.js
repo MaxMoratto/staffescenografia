@@ -75,8 +75,11 @@ export default function RootLayout({ children }) {
                 </a>
               </div>
               
-              <div style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid #374151', width: '100%', color: '#6b7280', fontSize: '0.85rem' }}>
-                © {new Date().getFullYear()} Staff Escenografía. Todos los derechos reservados.
+              <div style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid #374151', width: '100%', color: '#6b7280', fontSize: '0.85rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
+                <span>© {new Date().getFullYear()} Staff Escenografía. Todos los derechos reservados.</span>
+                <span style={{ fontSize: '0.75rem', opacity: 0.6, marginTop: '0.2rem' }}>
+                  Una plataforma diseñada por <strong style={{ color: 'var(--primary)', letterSpacing: '1px' }}>maximowebmaster</strong>
+                </span>
               </div>
               
             </div>
