@@ -159,26 +159,16 @@ export default function NuevoProductoPage() {
   };
 
   const generateDynamicDescription = (name, category, themeStr) => {
-    const adjectives = ['impactante', 'espectacular', 'premium', 'exclusiva', 'de alta gama', 'vanguardista', 'inmersiva', 'hiperrealista'];
-    const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const impactWords = ['espectacular', 'imponente', 'memorable', 'divertido', 'increíble', 'asombroso'];
+    const randomWord = impactWords[Math.floor(Math.random() * impactWords.length)];
     
-    let base = `La pieza ${name} es una obra ${randomAdjective} diseñada para elevar el valor de producción de tu evento. `;
-    
-    if (category === 'Escenografía Temática') {
-      base += `Creada con calidad museográfica, se convierte en el escenari0 y punto focal perfecto para lograr una atmósfera realista e instagrameable. `;
-    } else if (category === 'Props y Decoración') {
-      base += `Sus texturas, relieves y detalles minuciosos aseguran que luzca perfecta ante la vista de los invitados e incluso en primeros planos de cámara. `;
-    } else if (category === 'Mobiliario para Eventos') {
-      base += `Combina una presencia estética superior con funcionalidad de alto nivel, pensada para sorprender asistentes V.I.P. `;
-    } else {
-      base += `Construida bajo estrictos manuales artísticos de Staff Escenografía para garantizar asombro y calidad visual insuperable. `;
-    }
+    let base = `Este elemento volumétrico (${name}) está diseñado para crear un ambiente ${randomWord} y conectar profundamente con las emociones de tus invitados. Su objetivo principal es transformar cualquier espacio común en una escenografía viva que recrea momentos inolvidables. `;
 
     if (themeStr && themeStr.length > 0) {
       const themesArr = themeStr.split(',');
-      base += `Absolutamente recomendada para producciones inspiradas en ${themesArr[0]} o similares, logrando una narrativa inmersiva impecable.`;
+      base += `Resulta ser la pieza perfecta para elevar la inmersión en fiestas y eventos con temática de ${themesArr[0]}, aportando un alto impacto visual muy fotografiable.`;
     } else {
-      base += `Gracias a su estética versátil, logra mimetizarse y enriquecer una amplia variedad de conceptos creativos y estilos de decoración.`;
+      base += `Resulta ser una pieza clave para enriquecer producciones creativas y celebraciones temáticas variadas, aportando siempre un alto impacto visual muy fotografiable.`;
     }
 
     return base;
