@@ -20,9 +20,7 @@ export default function ProductModal({ product, onClose }) {
     const altura = product.dimensions?.height ? `${product.dimensions.height} cm` : 'Pendiente';
 
     const rawText = `¡Hola! Aquí tienes la ficha de la pieza de Staff Escenografía:
-${productLink}
-
-${vendorCode ? `Asesor: ${vendorCode}` : ''}`.trim();
+${productLink}`.trim();
 
     const encodedText = encodeURIComponent(rawText);
     
@@ -39,7 +37,7 @@ ${vendorCode ? `Asesor: ${vendorCode}` : ''}`.trim();
 
   const handleShareEmail = () => {
     const subject = `Cotización Escenografía: ${product.name}`;
-    const body = `Mira esta pieza de Staff Escenografía:\n\n${product.name} (SKU: ${product.sku})\nPrecio: $${product.rentalPrice} / día\n\n${vendorCode ? `Vendedor: ${vendorCode}` : ''}\n\nDimensiones: ${product.dimensions?.height || '-'}x${product.dimensions?.width || '-'}x${product.dimensions?.depth || '-'} cm`;
+    const body = `Mira esta pieza de Staff Escenografía:\n\n${product.name} (SKU: ${product.sku})\nPrecio: $${product.rentalPrice} / día\n\nDimensiones: ${product.dimensions?.height || '-'}x${product.dimensions?.width || '-'}x${product.dimensions?.depth || '-'} cm`;
     window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
   };
 
@@ -120,14 +118,7 @@ ${vendorCode ? `Asesor: ${vendorCode}` : ''}`.trim();
             </div>
 
             <div className="share-box" style={{marginTop: '1.5rem', marginBottom: '1.5rem', padding: '1rem', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0'}}>
-              <h4 style={{fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.8rem', color: '#64748b', fontWeight: 'bold'}}>📲 Enviar al Cliente</h4>
-              <input 
-                type="text" 
-                placeholder="Código Autorizado de Vendedor (Opcional)" 
-                value={vendorCode}
-                onChange={(e) => setVendorCode(e.target.value)}
-                style={{width: '100%', padding: '0.6rem', paddingLeft: '1rem', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '0.9rem', marginBottom: '0.8rem'}} 
-              />
+              <h4 style={{fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.8rem', color: '#64748b', fontWeight: 'bold'}}>📲 Enviar Ficha de Pieza</h4>
               <div style={{display: 'flex', gap: '0.5rem'}}>
                 <button onClick={handleShareWhatsApp} style={{flex: 1, backgroundColor: '#25D366', color: '#fff', border: 'none', padding: '0.6rem', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem'}}>
                   WhatsApp

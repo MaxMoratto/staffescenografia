@@ -25,9 +25,15 @@ export default function CatalogoPage() {
     // Read URL params safely
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
+      
       const themeParam = params.get('theme');
       if (themeParam) {
         setThemeFilter(themeParam.toUpperCase()); // Set the exact theme
+      }
+
+      const busquedaParam = params.get('busqueda');
+      if (busquedaParam) {
+        setSearchTerm(busquedaParam); // Set exact SKU or search query from URL link
       }
     }
 
