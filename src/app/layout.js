@@ -26,9 +26,62 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
+      <head>
+        {/* Este head adicional ayuda como respaldo para redes sociales */}
+      </head>
       <body>
         <QuoteProvider>
           {children}
+          
+          <footer style={{
+            backgroundColor: '#111827', // Dark gray
+            color: '#f3f4f6',
+            padding: '4rem 2rem 2rem 2rem',
+            marginTop: 'auto',
+            borderTop: '4px solid var(--primary)', // Línea oro elegante
+            fontFamily: 'Inter, sans-serif'
+          }}>
+            <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1.5rem' }}>
+              
+              <h2 style={{ fontSize: '1.8rem', fontWeight: 'bold', margin: 0, fontFamily: 'Outfit, sans-serif' }}>
+                Staff Escenografía
+              </h2>
+              
+              <p style={{ color: '#9ca3af', maxWidth: '600px', fontSize: '1rem', lineHeight: '1.5' }}>
+                Transformamos espacios en experiencias inolvidables. Maestros en escenografía temática y elementos volumétricos para la industria de eventos corporativos, fiestas y festivales.
+              </p>
+              
+              <div style={{ display: 'flex', gap: '2.5rem', marginTop: '1rem' }}>
+                {/* Facebook Link */}
+                <a href="https://www.facebook.com/staffescenografia" target="_blank" rel="noopener noreferrer" 
+                   style={{ color: 'var(--primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.1rem', fontWeight: '500' }}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                  </svg>
+                  Facebook
+                </a>
+
+                {/* Instagram Link */}
+                <a href="https://www.instagram.com/staffescenografia" target="_blank" rel="noopener noreferrer" 
+                   style={{ color: 'var(--primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.1rem', fontWeight: '500' }}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                  Instagram
+                </a>
+              </div>
+              
+              <div style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid #374151', width: '100%', color: '#6b7280', fontSize: '0.85rem' }}>
+                © {new Date().getFullYear()} Staff Escenografía. Todos los derechos reservados.
+              </div>
+              
+            </div>
+          </footer>
+
           <QuoteSidebar />
         </QuoteProvider>
       </body>

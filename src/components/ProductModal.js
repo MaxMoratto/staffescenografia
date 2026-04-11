@@ -85,10 +85,6 @@ ${vendorCode ? `Asesor: ${vendorCode}` : ''}`.trim();
               <span className="price-label">Precio Renta (Base)</span>
               <p className="price-tag">${product.rentalPrice} <span className="price-period">MXN / día</span></p>
             </div>
-            
-            <div className="description-box">
-              <p>{product.shortDescription || "Esta pieza está diseñada bajo los más altos estándares escenográficos, ideal para crear atmósferas inmersivas en eventos corporativos y temáticos."}</p>
-            </div>
 
             <div className="specs-grid">
               <div className="spec-item">
@@ -117,6 +113,10 @@ ${vendorCode ? `Asesor: ${vendorCode}` : ''}`.trim();
                 {(product.availability?.slp > 0) && <span className="city-chip">SLP: {product.availability.slp}</span>}
                 {(product.availability?.toluca > 0) && <span className="city-chip">Toluca: {product.availability.toluca}</span>}
               </div>
+            </div>
+            
+            <div className="description-box" style={{ marginTop: '1.5rem' }}>
+              <p>{product.shortDescription || "Este elemento volumétrico está diseñado para conectar con las emociones de tus invitados. Su objetivo es transformar cualquier espacio en una escenografía que recrea momentos inolvidables."}</p>
             </div>
 
             <div className="share-box" style={{marginTop: '1.5rem', marginBottom: '1.5rem', padding: '1rem', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0'}}>
