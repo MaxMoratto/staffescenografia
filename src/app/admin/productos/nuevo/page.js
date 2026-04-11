@@ -142,15 +142,41 @@ export default function NuevoProductoPage() {
           canvas.height = height;
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
+
+          // Función para exportar el canvas a archivo final
+          const finalizeImage = () => {
+            canvas.toBlob((blob) => {
+              const resizedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+                type: 'image/jpeg',
+                lastModified: Date.now()
+              });
+              resolve(resizedFile);
+            }, 'image/jpeg', 0.82); // 82% quality (muy buena compresión)
+          };
+
+          // 🔥 INYECCIÓN DE SELLO DE AGUA 🔥
+          const watermark = new Image();
+          watermark.crossOrigin = "anonymous";
+          watermark.src = '/logo.png'; // Requisito: que el logo exista en frontend/public/logo.png
           
-          // Exportar a JPEG comprimido
-          canvas.toBlob((blob) => {
-            const resizedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
-              type: 'image/jpeg',
-              lastModified: Date.now()
-            });
-            resolve(resizedFile);
-          }, 'image/jpeg', 0.82); // 82% quality (muy buena compresión sin perder calidad visual)
+          watermark.onload = () => {
+            // Calcular tamaño del sello relativo a la foto (25% del ancho de la imagen)
+            const wmWidth = width * 0.25; 
+            const wmHeight = (watermark.height / watermark.width) * wmWidth;
+            const padding = 30; // 30 pixeles de margen
+            
+            // Nivel de transparencia (60% visible para que parezca marca de agua sutil)
+            ctx.globalAlpha = 0.6;
+            ctx.drawImage(watermark, width - wmWidth - padding, height - wmHeight - padding, wmWidth, wmHeight);
+            ctx.globalAlpha = 1.0; // Resetear el Alpha por seguridad
+            
+            finalizeImage();
+          };
+          
+          watermark.onerror = () => {
+            console.warn("No se encontró /logo.png para la marca de agua. Guardando foto limpia.");
+            finalizeImage();
+          };
         };
         img.src = e.target.result;
       };

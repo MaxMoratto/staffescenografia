@@ -77,13 +77,37 @@ export default function EditarProductoPage() {
           canvas.height = height;
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
-          canvas.toBlob((blob) => {
-            const resizedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
-              type: 'image/jpeg',
-              lastModified: Date.now()
-            });
-            resolve(resizedFile);
-          }, 'image/jpeg', 0.82);
+          // Función para exportar el canvas a archivo final
+          const finalizeImage = () => {
+            canvas.toBlob((blob) => {
+              const resizedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+                type: 'image/jpeg',
+                lastModified: Date.now()
+              });
+              resolve(resizedFile);
+            }, 'image/jpeg', 0.82);
+          };
+
+          // 🔥 INYECCIÓN DE SELLO DE AGUA 🔥
+          const watermark = new Image();
+          watermark.crossOrigin = "anonymous";
+          watermark.src = '/logo.png'; 
+          
+          watermark.onload = () => {
+            const wmWidth = width * 0.25; 
+            const wmHeight = (watermark.height / watermark.width) * wmWidth;
+            const padding = 30; 
+            
+            ctx.globalAlpha = 0.6;
+            ctx.drawImage(watermark, width - wmWidth - padding, height - wmHeight - padding, wmWidth, wmHeight);
+            ctx.globalAlpha = 1.0; 
+            
+            finalizeImage();
+          };
+          
+          watermark.onerror = () => {
+            finalizeImage();
+          };
         };
         img.src = e.target.result;
       };
