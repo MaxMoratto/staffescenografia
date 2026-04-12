@@ -185,19 +185,11 @@ export default function NuevoProductoPage() {
   };
 
   const generateDynamicDescription = (name, category, themeStr) => {
-    const impactWords = ['espectacular', 'imponente', 'memorable', 'divertido', 'increíble', 'asombroso'];
+    const impactWords = ['inolvidable', 'espectacular', 'imponente', 'inmersivo', 'asombroso'];
     const randomWord = impactWords[Math.floor(Math.random() * impactWords.length)];
+    const temas = (themeStr && themeStr.length > 0) ? themeStr.split(',').slice(0, 3).join(' y ') : 'diversas temáticas';
     
-    let base = `Este elemento volumétrico (${name}) está diseñado para crear un ambiente ${randomWord} y conectar profundamente con las emociones de tus invitados. Su objetivo principal es transformar cualquier espacio común en una escenografía viva que recrea momentos inolvidables. `;
-
-    if (themeStr && themeStr.length > 0) {
-      const themesArr = themeStr.split(',');
-      base += `Resulta ser la pieza perfecta para elevar la inmersión en fiestas y eventos con temática de ${themesArr[0]}, aportando un alto impacto visual muy fotografiable.`;
-    } else {
-      base += `Resulta ser una pieza clave para enriquecer producciones creativas y celebraciones temáticas variadas, aportando siempre un alto impacto visual muy fotografiable.`;
-    }
-
-    return base;
+    return `La pieza "${name}" es clave para la decoración de eventos de ${temas}. Creará un impacto ${randomWord} en tus invitados, transportándolos directamente al tema elegido y funcionando como un spot fotográfico perfecto.`;
   };
 
   const handleSubmit = async (e) => {

@@ -137,6 +137,14 @@ export default function EditarProductoPage() {
     }
   };
 
+  const generateDynamicDescription = (name, category, themeStr) => {
+    const impactWords = ['inolvidable', 'espectacular', 'imponente', 'inmersivo', 'asombroso'];
+    const randomWord = impactWords[Math.floor(Math.random() * impactWords.length)];
+    const temas = (themeStr && themeStr.length > 0) ? themeStr.split(',').slice(0, 3).join(' y ') : 'diversas temáticas';
+    
+    return `La pieza "${name}" es clave para la decoración de eventos de ${temas}. Creará un impacto ${randomWord} en tus invitados, transportándolos directamente al tema elegido y funcionando como un spot fotográfico perfecto.`;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -144,6 +152,15 @@ export default function EditarProductoPage() {
     try {
       const form = new FormData(e.target);
       const sku = productData.sku;
+
+      const inputName = form.get('name');
+      const inputCategory = form.get('category');
+      const inputTheme = form.get('theme') || '';
+      
+      let finalDescription = form.get('description') || '';
+      if (!finalDescription || finalDescription.trim() === '') {
+        finalDescription = generateDynamicDescription(inputName, inputCategory, inputTheme);
+      }
 
       // 1. Upload any NEW images
       import('firebase/storage').then(async ({ ref, uploadBytes, getDownloadURL }) => {
@@ -165,11 +182,11 @@ export default function EditarProductoPage() {
           const cleanImagesArray = finalImages.filter(url => url !== null);
 
           const updatedProduct = {
-            name: form.get('name'),
-            category: form.get('category'),
-            theme: form.get('theme') || '',
+            name: inputName,
+            category: inputCategory,
+            theme: inputTheme,
             rentalPrice: Number(form.get('price')),
-            shortDescription: form.get('description') || '',
+            shortDescription: finalDescription,
             images: cleanImagesArray,
             imageUrl: cleanImagesArray[0] || '', // Principal image
             dimensions: {

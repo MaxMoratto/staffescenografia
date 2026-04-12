@@ -143,21 +143,60 @@ export default function AdminProductosPage() {
                                      (product.availability?.toluca || 0);
                   const isPending = product.status === 'Pendiente';
                                      
+                  const missingFields = [];
+                  const themeStr = Array.isArray(product.theme) ? product.theme.join('') : (product.theme || '');
+                  if (!themeStr.trim()) missingFields.push('Temática');
+                  
+                  if (!product.category || (typeof product.category === 'string' && product.category.trim() === '')) missingFields.push('Categoría');
+                  
+                  const desc = product.shortDescription || product.description;
+                  if (!desc || (typeof desc === 'string' && desc.trim() === '')) missingFields.push('Descripción');
+                  
+                  const dim = product.dimensions;
+                  const isDimEmpty = !dim || 
+                                     (typeof dim === 'string' && dim.trim() === '') || 
+                                     (typeof dim === 'object' && !dim.width && !dim.height && !dim.depth && !dim.length);
+                  if (isDimEmpty) missingFields.push('Medidas');
+
+                  if (!product.rentalPrice || product.rentalPrice <= 0) missingFields.push('Precio');
+                  if (!product.imageUrl && (!product.images || product.images.length === 0)) missingFields.push('Foto');
+
                   return (
                     <tr key={product.id} style={{ borderBottom: '1px solid var(--border)', transition: 'background 0.2s', backgroundColor: isPending ? '#fffbeb' : 'transparent' }}>
                       <td style={{ padding: '1rem' }}>
-                        <div style={{ width: '50px', height: '50px', backgroundColor: '#e9ecef', borderRadius: '4px', overflow: 'hidden' }}>
-                          {product.imageUrl ? (
-                            <img src={product.imageUrl} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                          ) : (
-                            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#999', fontSize: '0.75rem' }}>Sin foto</span>
-                          )}
-                        </div>
+                        <a 
+                          href={`/catalogo?busqueda=${product.sku}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          style={{ display: 'block', textDecoration: 'none', cursor: 'pointer' }}
+                          title="Ver en el catálogo público"
+                        >
+                          <div style={{ width: '50px', height: '50px', backgroundColor: '#e9ecef', borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--border)', transition: 'transform 0.2s', ':hover': { transform: 'scale(1.05)' } }}>
+                            {product.imageUrl ? (
+                              <img src={product.imageUrl} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            ) : product.images && product.images.length > 0 ? (
+                              <img src={product.images[0]} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            ) : (
+                              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#999', fontSize: '0.75rem', textAlign: 'center', lineHeight: '1' }}>Sin foto</span>
+                            )}
+                          </div>
+                        </a>
                       </td>
                       <td style={{ padding: '1rem' }}>
                         <strong style={{ color: 'var(--primary)', display: 'block' }}>{product.sku}</strong>
                         <span style={{ fontWeight: '500', fontSize: '0.9rem', display: 'block', marginBottom: '2px' }}>{product.name}</span>
-                        <span style={{ fontSize: '0.85rem', color: '#16a34a', fontWeight: 'bold' }}>${product.rentalPrice} MXN / día</span>
+                        <span style={{ fontSize: '0.85rem', color: '#16a34a', fontWeight: 'bold' }}>${product.rentalPrice || 0} MXN / día</span>
+                        
+                        {/* ALERT BADGES FOR MISSING INFO */}
+                        {missingFields.length > 0 && (
+                          <div style={{ marginTop: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                            {missingFields.map((field, idx) => (
+                              <span key={idx} style={{ backgroundColor: '#fee2e2', color: '#b91c1c', fontSize: '0.65rem', padding: '2px 6px', borderRadius: '4px', border: '1px solid #fca5a5' }}>
+                                ¡Falta {field}!
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </td>
                       <td style={{ padding: '1rem' }}>
                         <span className="info-badge" style={{ display: 'inline-block', marginBottom: '4px' }}>{totalStock} piezas totales</span>
