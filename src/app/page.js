@@ -12,6 +12,7 @@ export default function Home() {
           </Link>
         </div>
         <nav className="header-nav">
+          <Link href="/colecciones" className="nav-item">Temáticas</Link>
           <Link href="/catalogo" className="nav-item">Catálogo</Link>
           <Link href="/admin" className="nav-item">Acceso Staff</Link>
         </nav>
@@ -20,220 +21,258 @@ export default function Home() {
         </div>
       </header>
       
-      <section className="hero-section">
-        <div className="hero-content">
-          <span className="badge">Catálogo Premium 2024</span>
-          <h2 className="hero-title">Producción a otro nivel.</h2>
-          <p className="hero-subtitle">
-            Explora más de 5,000 elementos escenográficos auténticos. Muebles de época, 
-            estatuas temáticas y utilería detallada para tu próxima gran producción o evento.
+      {/* HERO SECTION PREMIUM */}
+      <section className="hero-section" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="hero-content" style={{ maxWidth: '900px' }}>
+          <span className="badge">Staff Escenografía B2B</span>
+          <h2 className="hero-title" style={{ fontSize: '3.5rem', lineHeight: '1.1' }}>
+            Escenografía, props y decoración para transformar cualquier espacio.
+          </h2>
+          <p className="hero-subtitle" style={{ fontSize: '1.2rem', marginTop: '1.5rem', color: '#475569', maxWidth: '800px', margin: '1.5rem auto', lineHeight: '1.6' }}>
+            Ofrecemos renta de elementos volumétricos, temáticos y decorativos para eventos, activaciones, exhibiciones, espacios comerciales, sets y experiencias de marca.
+            Trabajamos con agencias, corporativos, hoteles, productoras y clientes particulares. Contamos con más de 10,000 elementos disponibles.
           </p>
-          <div className="hero-cta" style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            <Link href="/catalogo" className="btn btn-primary" style={{ textDecoration: 'none' }}>Ver Catálogo</Link>
-            <Link href="/catalogo?new" className="btn btn-secondary" style={{ textDecoration: 'none' }}>Ver Novedades</Link>
+          <div className="hero-cta" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+            <Link href="/catalogo" className="btn btn-primary" style={{ textDecoration: 'none', padding: '1rem 2rem', fontSize: '1.1rem' }}>Ver catálogo completo</Link>
+            <Link href="/colecciones" className="btn btn-secondary" style={{ textDecoration: 'none', padding: '1rem 2rem', fontSize: '1.1rem' }}>Buscar por temática</Link>
+            <a href="https://wa.me/5211234567890" target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ textDecoration: 'none', padding: '1rem 2rem', fontSize: '1.1rem', backgroundColor: '#25D366', color: 'white', border: 'none' }}>Hablar por WhatsApp</a>
           </div>
         </div>
       </section>
 
-      {/* RESTORED FEATURES SECTION */}
-      <section className="features-section" style={{ marginTop: '4rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', padding: '0 1rem' }}>
-        <div className="feature-card" style={{ padding: '2.5rem', backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', border: '1px solid #f1f5f9' }}>
-          <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ fontSize: '1.5rem' }}>🎭</span> Utilería Temática
-          </h3>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>Más de 5,000 piezas detalladas para dar vida a cualquier época, cultura o fantasía imaginable.</p>
+      {/* MARQUEE INFINITO B2B */}
+      <div className="marquee-container" style={{ borderTop: '1px solid #1e293b', borderBottom: '1px solid #1e293b' }}>
+        <div className="marquee-content">
+          {[...Array(8)].map((_, i) => (
+            <div className="marquee-item" key={i}>
+              <span>RENTAS B2B</span> <span className="marquee-dot"></span>
+              <span>MÁS DE 10,000 PIEZAS</span> <span className="marquee-dot"></span>
+              <span>ESCENOGRAFÍA IMPACTANTE</span> <span className="marquee-dot"></span>
+              <span>COBERTURA NACIONAL</span> <span className="marquee-dot"></span>
+            </div>
+          ))}
         </div>
-        <div className="feature-card" style={{ padding: '2.5rem', backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', border: '1px solid #f1f5f9' }}>
-          <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ fontSize: '1.5rem' }}>🪑</span> Mobiliario Eventos
-          </h3>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>Salas lounge, mesas imperiales, periqueras y sillería premium para producciones de gran aforo.</p>
+      </div>
+
+      {/* BIG STATEMENT SECTION */}
+      <section style={{ textAlign: 'center', padding: '3rem 1rem', backgroundColor: '#f8fafc', color: '#1e293b' }}>
+        <h2 style={{ fontSize: '3rem', fontWeight: '900', letterSpacing: '-1px', marginBottom: '1rem', fontFamily: 'Outfit, sans-serif' }}>
+          No rentamos objetos. <br/> <span style={{ color: 'var(--primary)' }}>Rentamos impacto visual.</span>
+        </h2>
+        <p style={{ fontSize: '1.3rem', maxWidth: '700px', margin: '0 auto', color: '#475569', lineHeight: '1.6' }}>
+          No vendemos piezas sueltas. Resolvemos la ambientación, la presencia y la experiencia. Soluciones rápidas, visuales y rentables para cualquier industria.
+        </p>
+      </section>
+
+      {/* 4 LÍNEAS DE OFERTA */}
+      <section style={{ padding: '2rem 1rem', maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '2.5rem', color: '#1e293b', marginBottom: '0.5rem' }}>Estructura de Soluciones</h2>
+          <p style={{ color: '#64748b', fontSize: '1.1rem' }}>Si necesitas llamar la atención, crear una experiencia o vestir un espacio, podemos ayudarte.</p>
         </div>
-        <div className="feature-card" style={{ padding: '2.5rem', backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', border: '1px solid #f1f5f9' }}>
-          <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ fontSize: '1.5rem' }}>🌿</span> Follaje y Plantas
-          </h3>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>Árboles a gran escala, muros verdes y centros de mesa botánicos hiperrealistas para inmersión total.</p>
+
+        <div className="features-grid-b2b">
+          <div className="feature-card" style={{ padding: '1.5rem', backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
+            <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🏛️</div>
+            <h3 style={{ fontSize: '1.05rem', color: '#0f172a', marginBottom: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Ambientación y Transformación</h3>
+            <p style={{ color: '#334155', fontSize: '0.9rem', lineHeight: '1.4', marginBottom: '1rem' }}>Para quienes quieren cambiar por completo la percepción de un lugar.</p>
+            <strong style={{ fontSize: '0.8rem', color: 'var(--primary)' }}>Hoteles • Salones • Restaurantes • Oficinas</strong>
+          </div>
+
+          <div className="feature-card" style={{ padding: '1.5rem', backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
+            <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🛍️</div>
+            <h3 style={{ fontSize: '1.05rem', color: '#0f172a', marginBottom: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Exhibición y Atracción</h3>
+            <p style={{ color: '#334155', fontSize: '0.9rem', lineHeight: '1.4', marginBottom: '1rem' }}>Para negocios que necesitan un foco visual innegable para llamar la atención masiva.</p>
+            <strong style={{ fontSize: '0.8rem', color: 'var(--primary)' }}>Escaparates • Aperturas • Activaciones • Stands</strong>
+          </div>
+
+          <div className="feature-card" style={{ padding: '1.5rem', backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
+            <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🎭</div>
+            <h3 style={{ fontSize: '1.05rem', color: '#0f172a', marginBottom: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Producción Temática</h3>
+            <p style={{ color: '#334155', fontSize: '0.9rem', lineHeight: '1.4', marginBottom: '1rem' }}>Para marcas o clientes que necesitan crear una experiencia temática inmersiva y real.</p>
+            <strong style={{ fontSize: '0.8rem', color: 'var(--primary)' }}>Fiestas Coporativas • Halloween • Fin de Año</strong>
+          </div>
+
+          <div className="feature-card" style={{ padding: '1.5rem', backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
+            <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🎬</div>
+            <h3 style={{ fontSize: '1.05rem', color: '#0f172a', marginBottom: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Producción Audiovisual</h3>
+            <p style={{ color: '#334155', fontSize: '0.9rem', lineHeight: '1.4', marginBottom: '1rem' }}>Para quienes necesitan piezas hiperrealistas para grabaciones o campañas digitales.</p>
+            <strong style={{ fontSize: '0.8rem', color: 'var(--primary)' }}>Comerciales • Cine • Sesiones de Foto • Videos</strong>
+          </div>
         </div>
       </section>
 
-      {/* CASOS DE ÉXITO SECTION */}
-      <section style={{ marginTop: '5rem', marginBottom: '1rem', textAlign: 'center', padding: '0 1rem' }}>
-        <span style={{ color: 'var(--primary)', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Portafolio Visual</span>
-        <h2 style={{ fontSize: '2.5rem', marginTop: '0.5rem' }}>Casos de Éxito</h2>
-        <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '1rem auto 2rem' }}>
-          Ve en acción cómo nuestras piezas monumentales transforman por completo la inmersión y la escala de eventos reales.
+      {/* CASOS DE ÉXITO SECTION (VIDEOS - KEPT) */}
+      <section style={{ marginTop: '2rem', marginBottom: '2rem', textAlign: 'center', padding: '0 1rem', backgroundColor: '#ffffff', color: 'var(--text-primary)' }}>
+        <span style={{ color: 'var(--primary)', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '2px', textTransform: 'uppercase' }}>Portafolio Visual</span>
+        <h2 style={{ fontSize: '3rem', marginTop: '0.5rem', marginBottom: '1rem', color: '#1e293b' }}>Casos de Éxito</h2>
+        <p style={{ color: '#64748b', maxWidth: '700px', margin: '0 auto 2rem', fontSize: '1.1rem' }}>
+          Ve en acción cómo nuestras piezas monumentales transforman por completo la inmersión y la escala de eventos reales en vivo.
         </p>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', maxWidth: '1100px', margin: '0 auto' }}>
           {/* Video 1 */}
-          <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', aspectRatio: '16/9' }}>
-            <iframe 
-              width="100%" 
-              height="100%" 
-              src="https://www.youtube.com/embed/irVPmhTSDhc?autoplay=0&rel=0" 
-              title="Caso de Éxito 1" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen
-            ></iframe>
+          <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', aspectRatio: '16/9' }}>
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/irVPmhTSDhc?autoplay=0&rel=0" title="Caso de Éxito 1" frameBorder="0" allowFullScreen></iframe>
           </div>
-
           {/* Video 2 */}
-          <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', aspectRatio: '16/9' }}>
-            <iframe 
-              width="100%" 
-              height="100%" 
-              src="https://www.youtube.com/embed/TuU_K_qZwOw?autoplay=0&rel=0" 
-              title="Caso de Éxito 2" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen
-            ></iframe>
+          <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', aspectRatio: '16/9' }}>
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/TuU_K_qZwOw?autoplay=0&rel=0" title="Caso de Éxito 2" frameBorder="0" allowFullScreen></iframe>
+          </div>
+          {/* Video 3 */}
+          <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', aspectRatio: '16/9' }}>
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/m9QQKzApkXY?autoplay=0&rel=0" title="Caso de Éxito 3" frameBorder="0" allowFullScreen></iframe>
+          </div>
+          {/* Video 4 */}
+          <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', aspectRatio: '16/9' }}>
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/cBT8kZ_KSGM?autoplay=0&rel=0" title="Caso de Éxito 4" frameBorder="0" allowFullScreen></iframe>
+          </div>
+          {/* Video 5 */}
+          <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', aspectRatio: '16/9' }}>
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/idXaYBzp_-M?autoplay=0&rel=0" title="Caso de Éxito 5" frameBorder="0" allowFullScreen></iframe>
+          </div>
+          {/* Video 6 */}
+          <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', aspectRatio: '16/9' }}>
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/YcRGXZzq2IU?autoplay=0&rel=0" title="Caso de Éxito 6" frameBorder="0" allowFullScreen></iframe>
           </div>
         </div>
       </section>
 
-      {/* RESTORED CATALOG TITLE */}
-      <section style={{ marginTop: '5rem', marginBottom: '1rem', textAlign: 'center', padding: '0 1rem' }}>
-        <span style={{ color: 'var(--primary)', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Catálogo Exclusivo</span>
-        <h2 style={{ fontSize: '2.5rem', marginTop: '0.5rem' }}>Colecciones Curadas</h2>
-        <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '1rem auto 0' }}>Explora nuestras líneas conceptuales pre-armadas diseñadas por expertos escenógrafos.</p>
+      {/* INDUSTRIAS QUE ATENDEMOS */}
+      <section style={{ maxWidth: '1200px', margin: '3rem auto 3rem', padding: '0 1rem' }}>
+        <h2 style={{ fontSize: '2.5rem', textAlign: 'center', marginBottom: '2rem', color: '#1e293b' }}>Industrias que Atendemos</h2>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+          {[
+            { title: "Eventos y Celebraciones", desc: "Bodas, XV años, cumpleaños, aniversarios, fiestas temáticas y eventos privados." },
+            { title: "Empresas y Corporativos", desc: "Convenciones, lanzamientos, aniversarios de marca, foros, premiaciones y activaciones." },
+            { title: "Hoteles y Nightlife", desc: "Ambientación temporal, decoración rotativa, photo opportunities y experiencias." },
+            { title: "Retail y Plazas Comerciales", desc: "Escaparates, exhibiciones de temporada, decoración promocional para aumentar tráfico." },
+            { title: "Escuelas y Universidades", desc: "Graduaciones, festivales, ceremonias, eventos institucionales y escenografía teatral." },
+            { title: "Gobierno y Cultura", desc: "Ferias, festivales de ciudad, exposiciones, celebraciones patrias y arte inmersivo." }
+          ].map((ind, i) => (
+            <div key={i} style={{ borderBottom: '1px solid #e2e8f0', paddingBottom: '1rem' }}>
+              <h4 style={{ color: 'var(--primary)', fontSize: '1.1rem', marginBottom: '0.3rem', fontWeight: 'bold' }}>{ind.title}</h4>
+              <p style={{ color: '#475569', fontSize: '0.95rem' }}>{ind.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* TOP 6 TEMÁTICAS NUMERADAS */}
+      <section style={{ marginTop: '4rem', marginBottom: '1rem', textAlign: 'center', padding: '0 1rem' }}>
+        <span style={{ color: 'var(--primary)', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>TOP DE EVENTOS</span>
+        <h2 style={{ fontSize: '2.5rem', marginTop: '0.5rem' }}>Las 6 Temáticas Más Demandadas</h2>
+        <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0.5rem auto 0' }}>El mercado corporativo escoge mayormente estos ambientes.</p>
       </section>
 
       <section className="categories-grid" style={{
-        marginTop: '2rem', 
+        marginTop: '1.5rem', 
         display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', 
-        gap: '1rem',
-        padding: '0 1rem'
+        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
+        gap: '1.5rem',
+        padding: '0 1rem',
+        maxWidth: '1200px',
+        margin: '3rem auto 0'
       }}>
-        {ALL_THEMES.map((theme) => {
-          let bgImage = "linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%)";
-          const gradient = `linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%)`;
-          
-          if (theme === "NOCHE DE OSCARES / ALFOMBRA ROJA") bgImage = `${gradient}, url('/themes/tema_oscares_1775628584134.png')`;
-          if (["FÓRMULA 1", "F1 GRAN PRIX", "F1 FIESTA TEMA", "F1 SIMULADORES"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_f1_1775629680591.png')`;
-          if (theme === "ALICIA EN EL PAÍS DE LAS MARAVILLAS") bgImage = `${gradient}, url('/themes/tema_alicia_1775628599698.png')`;
-          if (theme === "PARÍS & BURLESQUE") bgImage = `${gradient}, url('/themes/tema_paris_1775629698111.png')`;
-          if (theme === "CASINO LAS VEGAS") bgImage = `${gradient}, url('/themes/tema_casino_1775628613468.png')`;
-          if (theme === "CIRCO VINTAGE") bgImage = `${gradient}, url('/themes/tema_circo_1775629712579.png')`;
-          if (["BAILE DE MÁSCARAS / VENECIANO", "MARDI GRAS", "VENECIANO", "CARNAVAL"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_veneciano_1775629726730.png')`;
-          if (theme === "BLANCO Y NEGRO (ELEGANTE)") bgImage = `${gradient}, url('/themes/tema_blancoynegro_1775629742168.png')`;
-          if (["SAFARI / SELVA", "ANIMALES", "ANIMALES DE JUNGLA", "JUNGLA / SELVA", "ANIMALES DE ZOOLÓGICO", "SAFARI", "SELVA / SALVAJE"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_safari_1775631433405.png')`;
-          if (["ANIMALES DE GRANJA", "GRANJA"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_granja_1775631452123.png')`;
-          if (["LONDRES"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_londres_1775636270738.png')`;
-          if (["CARIBE", "PLAYA"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_caribe_1775631469531.png')`;
-          if (theme === "DÉCADAS 70S") bgImage = `${gradient}, url('/themes/tema_70s_1775631487091.png')`;
-          if (["DÉCADAS 80S", "80S", "RETRO"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_80s_1775631803118.png')`;
-          if (["GREASE", "DÉCADAS 50S", "ROCK AND ROLL"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_50s_1775631817666.png')`;
-          if (["HARRY POTTER", "MAGIA Y HECHICERÍA"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_magia_1775631829703.png')`;
-          if (["GRIEGO", "DIOSES", "OLIMPO"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_griego_1775631843850.png')`;
-          if (theme === "PIRATA") bgImage = `${gradient}, url('/themes/tema_pirata_1775631860005.png')`;
-          if (["CABALLOS", "CABALLOS DE CARRUSEL"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_caballos_1775635746730.png')`;
-          if (["MEXICANO", "DESPECHO", "ARTE MEXICANO"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_mexicano_1775635761419.png')`;
-          if (["PREHISTÓRICO", "JURASICC PARK"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_dinos_1775635777241.png')`;
-          if (["DRAGONES", "GODZILLA", "KING KONG"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_monstruos_1775635793769.png')`;
-          if (["ARABE", "LAS MIL Y UNA NOCHES"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_arabe_1775635809361.png')`;
-          if (["ROMANO", "ANTIGUEDAD"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_romano_1775635879594.png')`;
-          if (["VINTAGE", "GREAT GASTBY", "CIRCO VINTAGE"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_gatsby_1775635894583.png')`;
-          if (["STAR WARS", "ESPACIAL"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_starwars_1775635909844.png')`;
-          if (["OKTOBERFEST", "CERVEZA"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_oktoberfest_1775635925342.png')`;
-          if (["NAVIDAD / CHRISTMAS", "NACIMIENTOS", "POSADAS"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_navidad_1775635963825.png')`;
-          if (["HALLOWEEN", "CASA DE LOS ESPANTOS"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_halloween_1775635979854.png')`;
-          if (["DÍA DE MUERTOS", "CATRINAS"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_diademuertos_1775635992113.png')`;
-          if (["DÍA DEL AMOR Y LA AMISTAD"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_sanvalentin_1775636005008.png')`;
-          if (["FIESTA DE FIN DE AÑO", "NEON PARTY", "CARICATURAS", "PASCUA"].includes(theme)) bgImage = `${gradient}, url('/themes/tema_neon_1775636019582.png')`;
-
-          const slug = theme.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+        {[
+          { name: "NOCHE DE OSCARES / ALFOMBRA ROJA", slug: "noche-de-oscares-alfombra-roja", bg: "tema_oscares_1775628584134.png" },
+          { name: "FÓRMULA 1", slug: "formula-1", bg: "tema_f1_1775629680591.png" },
+          { name: "CASINO LAS VEGAS", slug: "casino-las-vegas", bg: "tema_casino_1775628613468.png" },
+          { name: "ALICIA EN EL PAÍS DE LAS MARAVILLAS", slug: "alicia-en-el-pais-de-las-maravillas", bg: "tema_alicia_1775628599698.png" },
+          { name: "SAFARI / SELVA", slug: "safari-selva", bg: "tema_safari_1775631433405.png" },
+          { name: "FIESTA NEÓN", slug: "neon-party", bg: "tema_neon_1775636019582.png" }
+        ].map((theme, index) => {
+          const bgImage = `linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 100%), url('/themes/${theme.bg}')`;
 
           return (
-            <Link key={theme} href={`/tematicas/${slug}`} style={{ textDecoration: 'none' }}>
+            <Link key={theme.name} href={`/tematicas/${theme.slug}`} style={{ textDecoration: 'none' }}>
               <div style={{
-                height: '150px',
-                borderRadius: '8px',
+                height: '250px', // Cuadros más grandes
+                borderRadius: '12px',
                 background: bgImage,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 display: 'flex',
-                alignItems: 'flex-end',
-                padding: '1rem',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                padding: '2rem',
                 color: 'white',
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                transition: 'transform 0.2s',
-                border: '1px solid #333'
+                boxShadow: '0 10px 15px -3px rgba(0,0,0,0.3)',
+                transition: 'all 0.3s',
+                border: '1px solid #333',
+                position: 'relative',
+                overflow: 'hidden'
               }} className="theme-card-hover">
-                <h3 style={{ fontSize: '1rem', fontWeight: 'bold', margin: 0, textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
-                  {theme}
+                
+                {/* Número Gigante con Transparencia */}
+                <div style={{
+                  position: 'absolute',
+                  top: '-10px',
+                  right: '10px',
+                  fontSize: '8rem',
+                  fontWeight: '900',
+                  color: 'rgba(255,255,255,0.1)',
+                  lineHeight: '1',
+                  fontFamily: 'Outfit'
+                }}>
+                  {index + 1}
+                </div>
+
+                <span style={{ color: 'var(--primary)', fontWeight: 'bold', letterSpacing: '2px', fontSize: '0.8rem', marginBottom: '0.5rem' }}>TOP {index + 1}</span>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: 'bold', margin: '0', textShadow: '0 2px 4px rgba(0,0,0,0.8)', lineHeight: '1.1' }}>
+                  {theme.name}
                 </h3>
               </div>
             </Link>
           );
         })}
       </section>
+
+      {/* INSTAGRAM GALLERY */}
+      <section style={{ marginTop: '5rem', marginBottom: '2rem', padding: '0 1rem', textAlign: 'center' }}>
+        <a href="https://instagram.com/staffescenografia" target="_blank" rel="noreferrer" style={{ display: 'inline-block', textDecoration: 'none' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+            <span style={{ fontSize: '1.5rem', color: '#E1306C' }}>📸</span>
+            <span style={{ color: 'var(--primary)', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '2px', textTransform: 'uppercase' }}>Síguenos en Instagram</span>
+          </div>
+          <h2 style={{ fontSize: '2.5rem', color: '#1e293b' }}>@staffescenografia</h2>
+        </a>
+        
+        <div className="insta-grid-5">
+          {[
+            "tema_oscares_1775628584134.png",
+            "tema_f1_1775629680591.png",
+            "tema_casino_1775628613468.png",
+            "tema_safari_1775631433405.png",
+            "tema_alicia_1775628599698.png"
+          ].map((img, idx) => (
+            <a key={idx} href="https://instagram.com/staffescenografia" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+              <div className="insta-hover" style={{
+                position: 'relative',
+                aspectRatio: '1/1',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                backgroundImage: `url('/themes/${img}')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                border: '1px solid #e2e8f0'
+              }}>
+                <div className="insta-overlay">
+                  <span style={{ color: 'white', fontSize: '2.5rem', transform: 'scale(0.8)', transition: 'transform 0.3s' }}>♥</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <div style={{ textAlign: 'center', marginTop: '4rem', paddingBottom: '5rem' }}>
+        <Link href="/colecciones" className="btn btn-secondary" style={{ fontSize: '1.2rem', padding: '1.2rem 3.5rem', fontWeight: 'bold', letterSpacing: '1px' }}>
+          Explorar las +50 Colecciones
+        </Link>
+      </div>
     </main>
   );
 }
-
-const ALL_THEMES = [
-  "NOCHE DE OSCARES / ALFOMBRA ROJA",
-  "FÓRMULA 1",
-  "F1 GRAN PRIX",
-  "F1 FIESTA TEMA",
-  "F1 SIMULADORES",
-  "ALICIA EN EL PAÍS DE LAS MARAVILLAS",
-  "PARÍS & BURLESQUE",
-  "CASINO LAS VEGAS",
-  "CIRCO VINTAGE",
-  "BAILE DE MÁSCARAS / VENECIANO",
-  "MARDI GRAS",
-  "BLANCO Y NEGRO (ELEGANTE)",
-  "SAFARI / SELVA",
-  "ANIMALES",
-  "ANIMALES DE GRANJA",
-  "ANIMALES DE JUNGLA",
-  "ANIMALES DE ZOOLÓGICO",
-  "CABALLOS",
-  "CABALLOS DE CARRUSEL",
-  "CARIBE",
-  "CARNAVAL",
-  "DÉCADAS 70S",
-  "DÉCADAS 80S",
-  "DESPECHO",
-  "DRAGONES",
-  "GODZILLA",
-  "GRANJA",
-  "GREASE",
-  "GRIEGO",
-  "HARRY POTTER",
-  "JUNGLA / SELVA",
-  "KING KONG",
-  "LONDRES",
-  "PIRATA",
-  "PLAYA",
-  "PREHISTÓRICO",
-  "ROMANO",
-  "SAFARI",
-  "SELVA / SALVAJE",
-  "VENECIANO",
-  "VINTAGE",
-  "GREAT GASTBY",
-  "MEXICANO",
-  "ARABE",
-  "LAS MIL Y UNA NOCHES",
-  "STAR WARS",
-  "JURASICC PARK",
-  "CARICATURAS",
-  "NEON PARTY",
-  "NAVIDAD / CHRISTMAS",
-  "NACIMIENTOS",
-  "POSADAS",
-  "FIESTA DE FIN DE AÑO",
-  "PASCUA",
-  "HALLOWEEN",
-  "CASA DE LOS ESPANTOS",
-  "CATRINAS",
-  "DÍA DE MUERTOS",
-  "DÍA DEL AMOR Y LA AMISTAD",
-  "OKTOBERFEST"
-];

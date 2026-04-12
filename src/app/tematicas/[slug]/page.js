@@ -253,11 +253,11 @@ export default function TematicaLanding() {
               {decoracionZ.length > 0 && (
                 <>
                   <h4 style={{ margin: '0 0 1.5rem 0', color: 'var(--text)', borderBottom: '2px solid var(--accent)', display: 'inline-block', paddingBottom: '0.5rem' }}>Elementos disponibles en catálogo:</h4>
-                  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                     {decoracionZ.map(p => {
                        const img = p.images && p.images.length > 0 ? p.images[0] : '/placeholder.png';
                        return (
-                         <Link href="/catalogo" key={p.id} style={{ width: '90px', textAlign: 'center', textDecoration: 'none', display: 'block' }}>
+                         <Link href={`/catalogo?busqueda=${p.sku || p.name}`} key={p.id} style={{ width: '90px', textAlign: 'center', textDecoration: 'none', display: 'block' }}>
                            <div style={{ width: '90px', height: '90px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #e2e8f0', backgroundImage: `url(${img})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
                            <div style={{ fontSize: '0.7rem', marginTop: '0.5rem', lineHeight: '1.2', color: '#64748b', fontWeight: 'bold' }}>{p.name.substring(0, 25)}{p.name.length > 25 ? '...' : ''}</div>
                          </Link>
@@ -322,7 +322,7 @@ export default function TematicaLanding() {
                     {mobiliarioZ.map(p => {
                        const img = p.images && p.images.length > 0 ? p.images[0] : '/placeholder.png';
                        return (
-                         <Link href="/catalogo" key={p.id} style={{ width: '90px', textAlign: 'center', textDecoration: 'none', display: 'block' }}>
+                         <Link href={`/catalogo?busqueda=${p.sku || p.name}`} key={p.id} style={{ width: '90px', textAlign: 'center', textDecoration: 'none', display: 'block' }}>
                            <div style={{ width: '90px', height: '90px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #e2e8f0', backgroundImage: `url(${img})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
                            <div style={{ fontSize: '0.7rem', marginTop: '0.5rem', lineHeight: '1.2', color: '#64748b', fontWeight: 'bold' }}>{p.name.substring(0, 25)}{p.name.length > 25 ? '...' : ''}</div>
                          </Link>
