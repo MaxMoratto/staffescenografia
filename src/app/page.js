@@ -57,6 +57,43 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CASOS DE ÉXITO SECTION */}
+      <section style={{ marginTop: '5rem', marginBottom: '1rem', textAlign: 'center', padding: '0 1rem' }}>
+        <span style={{ color: 'var(--primary)', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Portafolio Visual</span>
+        <h2 style={{ fontSize: '2.5rem', marginTop: '0.5rem' }}>Casos de Éxito</h2>
+        <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '1rem auto 2rem' }}>
+          Ve en acción cómo nuestras piezas monumentales transforman por completo la inmersión y la escala de eventos reales.
+        </p>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
+          {/* Video 1 */}
+          <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', aspectRatio: '16/9' }}>
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/irVPmhTSDhc?autoplay=0&rel=0" 
+              title="Caso de Éxito 1" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          {/* Video 2 */}
+          <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', aspectRatio: '16/9' }}>
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/TuU_K_qZwOw?autoplay=0&rel=0" 
+              title="Caso de Éxito 2" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
       {/* RESTORED CATALOG TITLE */}
       <section style={{ marginTop: '5rem', marginBottom: '1rem', textAlign: 'center', padding: '0 1rem' }}>
         <span style={{ color: 'var(--primary)', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Catálogo Exclusivo</span>

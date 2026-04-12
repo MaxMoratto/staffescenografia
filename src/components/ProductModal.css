@@ -77,9 +77,8 @@
 }
 
 .main-image-container {
-  flex: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   background-color: #ffffff;
   border-radius: 8px;
