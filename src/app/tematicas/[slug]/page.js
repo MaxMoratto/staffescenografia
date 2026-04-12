@@ -87,6 +87,7 @@ export default function TematicaLanding() {
   if (["DÍA DE MUERTOS", "CATRINAS"].includes(matchedTheme)) heroImage = '/themes/tema_diademuertos_1775635992113.png';
   if (["DÍA DEL AMOR Y LA AMISTAD"].includes(matchedTheme)) heroImage = '/themes/tema_sanvalentin_1775636005008.png';
   if (["FIESTA DE FIN DE AÑO", "NEON PARTY", "CARICATURAS", "PASCUA"].includes(matchedTheme)) heroImage = '/themes/tema_neon_1775636019582.png';
+  if (["SUPER HÉROES"].includes(matchedTheme)) heroImage = '/themes/tema_neon_1775636019582.png'; // Fallback visual pending specific hero image
 
   const hasPhoto = heroImage.includes('.png');
   const heroStyle = hasPhoto ? {

@@ -71,7 +71,7 @@ export default function CatalogoPage() {
     {
       title: "🎭 TEMÁTICAS (A - Z)",
       styles: { color: '#334155', marginTop: '1.5rem' },
-      themes: ["Alicia en el País de las Maravillas", "Animales", "Animales de Granja", "Animales de Jungla", "Animales de Zoológico", "Árabe", "Baile de Máscaras", "Blanco y Negro", "Caballos", "Caballos de Carrusel", "Caribe", "Caricaturas", "Carnaval", "Casino Las Vegas", "Circo Vintage", "Décadas 70s", "Décadas 80s", "Despecho", "Dragones", "Fórmula 1", "F1 Gran Prix", "F1 Simuladores", "Godzilla", "Granja", "Great Gatsby", "Grease", "Griego", "Harry Potter", "Jungla / Selva", "Jurassic Park", "King Kong", "Las Mil y Una Noches", "Londres", "Mardi Gras", "Mexicano", "Neon Party", "París & Burlesque", "Pirata", "Playa", "Prehistórico", "Romano", "Safari", "Selva / Salvaje", "Star Wars", "Veneciano", "Vintage"]
+      themes: ["Alicia en el País de las Maravillas", "Animales", "Animales de Granja", "Animales de Jungla", "Animales de Zoológico", "Árabe", "Baile de Máscaras", "Blanco y Negro", "Caballos", "Caballos de Carrusel", "Caribe", "Caricaturas", "Carnaval", "Casino Las Vegas", "Circo Vintage", "Décadas 70s", "Décadas 80s", "Despecho", "Dragones", "Fórmula 1", "F1 Gran Prix", "F1 Simuladores", "Godzilla", "Granja", "Great Gatsby", "Grease", "Griego", "Harry Potter", "Jungla / Selva", "Jurassic Park", "King Kong", "Las Mil y Una Noches", "Londres", "Mardi Gras", "Mexicano", "Neon Party", "París & Burlesque", "Pirata", "Playa", "Prehistórico", "Romano", "Safari", "Selva / Salvaje", "Star Wars", "Super Héroes", "Veneciano", "Vintage"]
     },
     {
       title: "🎄 TEMPORADA",

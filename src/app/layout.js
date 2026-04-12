@@ -1,6 +1,7 @@
 import './globals.css';
 import { QuoteProvider } from '../context/QuoteContext';
 import QuoteSidebar from '../components/QuoteSidebar';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'Staff Escenografía | Renta de Props y Escenografía Temática',
@@ -75,9 +76,19 @@ export default function RootLayout({ children }) {
                 </a>
               </div>
               
-              <div style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid #374151', width: '100%', color: '#6b7280', fontSize: '0.85rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
-                <span>© {new Date().getFullYear()} Staff Escenografía. Todos los derechos reservados.</span>
-                <span style={{ fontSize: '0.75rem', opacity: 0.6, marginTop: '0.2rem' }}>
+              <div style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid #374151', width: '100%', color: '#6b7280', fontSize: '0.85rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', alignItems: 'center' }}>
+                
+                {/* Legal Links (Subtle) */}
+                <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                  <Link href="/legal/privacidad" style={{ color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s' }}>Aviso de Privacidad</Link>
+                  <span style={{ color: '#4b5563' }}>|</span>
+                  <Link href="/legal/terminos" style={{ color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s' }}>Términos y Condiciones</Link>
+                  <span style={{ color: '#4b5563' }}>|</span>
+                  <Link href="/legal/cookies" style={{ color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s' }}>Política de Cookies</Link>
+                </div>
+
+                <span style={{ marginTop: '0.5rem' }}>© {new Date().getFullYear()} Staff Escenografía. POOL MKT S DE RL DE CV. Todos los derechos reservados.</span>
+                <span style={{ fontSize: '0.75rem', opacity: 0.6 }}>
                   Una plataforma diseñada por <strong style={{ color: 'var(--primary)', letterSpacing: '1px' }}>maximowebmaster</strong>
                 </span>
               </div>

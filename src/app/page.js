@@ -1,6 +1,7 @@
 import './globals.css';
 import './catalog.css';
 import Link from 'next/link';
+import RandomProducts from '../components/RandomProducts';
 
 export default function Home() {
   return (
@@ -59,12 +60,15 @@ export default function Home() {
         <h2 style={{ fontSize: '3rem', fontWeight: '900', letterSpacing: '-1px', marginBottom: '1rem', fontFamily: 'Outfit, sans-serif' }}>
           No rentamos objetos. <br/> <span style={{ color: 'var(--primary)' }}>Rentamos impacto visual.</span>
         </h2>
-        <p style={{ fontSize: '1.3rem', maxWidth: '700px', margin: '0 auto', color: '#475569', lineHeight: '1.6' }}>
+        <p style={{ fontSize: '1.25rem', maxWidth: '800px', margin: '0 auto', color: '#475569', lineHeight: '1.8' }}>
           No vendemos piezas sueltas. Resolvemos la ambientación, la presencia y la experiencia. Soluciones rápidas, visuales y rentables para cualquier industria.
         </p>
       </section>
 
-      {/* 4 LÍNEAS DE OFERTA */}
+      {/* RANDOM PRODUCTS GALLERY */}
+      <RandomProducts />
+
+      {/* ESTRUCTURA DE SOLUCIONES (4 Pilares) */}
       <section style={{ padding: '2rem 1rem', maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '2.5rem', color: '#1e293b', marginBottom: '0.5rem' }}>Estructura de Soluciones</h2>
